@@ -343,6 +343,8 @@ SkimR peut sembler rigide au premier abord. Cependant, il est possible de person
 
 ## Exercice 6 Une fonction qui a de l'allure
 
-un truc
+Désormais, à l’aide des sorties de la fonction skim(), que pouvez-vous dire à nouveau sur la distribution de la variable âge et que ne le permettait pas la fonction summary ?
+
+
 
 

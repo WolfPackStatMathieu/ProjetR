@@ -48,7 +48,8 @@ random_praises <- c(
   "Génial !",
   "Magnifique !",
   "Splendide !",
-  "Perfetto !"
+  "Perfetto !",
+  "test idiot"
 )
 
 

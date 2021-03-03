@@ -346,5 +346,72 @@ SkimR peut sembler rigide au premier abord. Cependant, il est possible de person
 Désormais, à l’aide des sorties de la fonction skim(), que pouvez-vous dire à nouveau sur la distribution de la variable âge et que ne le permettait pas la fonction summary ?
 
 
+<!-- FAIRE UN QUIZZ ICI-->
+
+-Skim fournit un histogramme de la distribution de chaque variable numérique, intégrée à la table des résultats. Cela permet de dire que la distribution de la variable âge est d’allure gaussienne, chose que l’on ne pouvait conclure à travers la fonction summary.
+- il n’y a aucune différence. 
+- La seule différence est le format.
+
+<!-- 
+@ Mathieu: skim() permet de visualiser l’allure de la distribution des variables, et en particulier de la variable âge. Donc, on peut déduire des histogrammes de sortie que la variable âge est globalement distribuée selon une loi normale.
+Voici le code pour vérifier la normalité d’une variable à travers un qq-plot:
+
+library("ggpubr")
+# QQ plot
+ggqqplot(hdv2003$age)
+
+-->
+### QQ-plot
+QQ-plot de la variable âge pour attester de la normalité de sa distribution (bien que les queues de distribution, à gauche notamment, s’écartent légèrement de la distribution normale théorique).
+
+<!-- début d’utilisation de skim_with, mise en pratique simpliste du texte précédent l’exo 6 -->
+## Exercice 7 Enlever l'histogramme de la sortie skim (déshabillez-moi!)
+
+Enlever l’histogramme de la sortie skim
+
+```{r exercice7, exercise=TRUE, exercise.eval=FALSE}
+
+```
+
+```{r exercice7-solution}
+# Pour enlever l’histogramme, voici les différentes possibilités: 
+# commentaires ici, est utilisé la technique skim_with qui permet d’implémenter une liste de stat à retourner ou non. Ici dans la liste on dit que l’on ne veut pas voir le graphe. D’une manière générale, si on souhaite se débarrasser d’un skimmer i.e. un statistique produite par skim, on la fixe = NULL. on peut avoir les noms des skimmer de base avec get_skimmer_names()
+sans_hist<- skim_with(numeric = sfl(hist = NULL))
+sans_hist(hdv2003)
+
+# Ou plus simplement :
+#commentaire : ici on utilise la fonction déjà implémentée qui retire le graph
+skim_without_charts(hdv2003)
+
+```
+
+```{r exercice7-hint-1}
+# Skim_with() est une fonction qui produit une fonction, skim_with() est clôturée au sens mathématique ; il est donc possible d’en créer plusieurs dans une même session R. Néanmoins, il faut assigner la sortie de skim_with() avant de ne pouvoir l'utiliser. 
+```
+
+# Apprenez à skimmer tout seul!
+la fonction skim_with() permet de travailler avec ses propres statistiques, sur les variables numériques par exemple :
+
+## Exemple 
+#commentaires : on choisit pour les variables numériques d’écraser les stats fournies initialement par skim_with(append=False) et de mettre l’écart interquartile et l’écart absolu à la médiane. On stocke ce skim_with() afin de pouvoir l’utiliser comme une fonction. on  peut utiliser la manière est directe, on déclare les nouvelles stats en même temps que le skim_with() ou on peut créer la liste de stat qu’on stocke, puis on crée le skim_with().
+
+<!-- @commentaires : on ne veut que sd et median, on les liste pour les variables numériques, et on écrase (append=False)-->
+```{r exemple1, exercise = FALSE, exercise.eval=FALSE}
+mon_skim <- skim_with(
+  numeric = sfl("écart-type"=sd,"médiane"=median),
+  append = FALSE)
+mon_skim(hdv2003)
+
+```
+
+<!--@on ne veut qu’une nouvelle variable “écart absolu à la médiane”, en se débarrassant des valeurs manquantes, il faut placer un tild avant la fonction et respecter la syntaxe suivante:  -->
+
+```{r exemple2, exercise=FALSE, exercise.eval=FALSE}
+mon_autre_skim<-skim_with(
+  numeric=sfl("écat absolu à la médiane"=~mad(.,na.rm=TRUE)),
+  				append=FALSE)
+mon_autre_skim(hdv2003)
+
+```
 
 

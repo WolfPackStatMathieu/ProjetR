@@ -343,4 +343,6 @@ SkimR peut sembler rigide au premier abord. Cependant, il est possible de person
 
 ## Exercice 6 Une fonction qui a de l'allure
 
+un truc
+
 

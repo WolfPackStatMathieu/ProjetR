@@ -414,6 +414,88 @@ mon_autre_skim(hdv2003)
 
 ```
 
-un changement 
-Salut je suis là
+<!--@une autre façon de coder est de lister les fonctions qu’on va stocker et de les renseigner à l’intérieur du skim_with(). Ici, mes_skimmers contient les fonctions (mean et max) pour les var num et (est ordonné ?) pour les factors.:
+-->
+```{r exemple3, exercise=TRUE, exercise.eval=FALSE}
+
+```
+
+```{r exemple3-solution}
+mes_skimmers<-list(
+  numeric=sfl(mean,max),
+  factor=sfl(is.ordered))
+mon_skim_2<-skim_with(mes_skimmers)
+mon_skim_2(hdv2003)
+
+```
+<!--@application de l’exemple précédent-->
+
+## Exercice 8
+Pour les variables de type numérique, ajoutez l’écart interquartile en prenant soin de supprimer les valeurs manquantes. Pour les variables de type facteur, déterminez le nombre d’éléments unique. 
+
+Dans un autre skim, n’affichez que l’écart absolu à la médiane pour la variable poids.
+
+```{r exercice8-ecart, exercise=TRUE, exercise.eval = FALSE}
+
+```
+```{r, exercice8-ecart-solution}
+#On utilise la même technique pour ajouter (append=TRUE) l’écart interquartile et enlever les NA. Pour les factors, n_unique permet de calculer le nombre d’éléments unique et de supprimer les NA.
+mon_skim_3<-skim_with(
+  numeric = sfl(eiq = ~ IQR(., na.rm = TRUE)),
+  factor = sfl(n_unique),append = TRUE)
+ 
+mon_skim_3(hdv2003)
+
+
+mon_skim_mad <- skim_with(
+  numeric = sfl("écat absolu à la médiane"= mad),
+  append = FALSE)
+mon_skim_mad(hdv2003$poids)
+
+
+```
+### compléments
+
+SkimR peut ainsi être combiné avec d’autres packages tels que tydiverse ou dplyr
+
+La fonction skim() est compatible avec les fonctions de manipulation de données du tidyverse et de {dplyr} notamment et permet également de calculer ces statistiques de base par classe, avec un code “allégé”. 
+La syntaxe est la suivante : les lignes faisant parties du bloc à traiter doivent être chacune suivies de” %>%” sauf la dernière qui marque la fin du bloc. Les fonctions utilisées doivent être précédées de “dplyr:: “
+Pour regrouper, la fonction de dplyr est group_by(), select() pour sélectionner des variables et filter() pour filtrer les informations désirées.
+
+## Exercice supplémentaire
+Skim fonctionne très bien avec les groupements. Réalisez un skim() de la table hdv2003 en regroupant les informations par sexe. Puis, entre la variable comptabilisant le nombre de frères et sœurs et celle comptabilisant le nombre d’heures passées devant la télévision, laquelle a la valeur moyenne la plus élevée (freres.soeurs)?La table hdv2003 comporte-t-elle des valeurs manquantes (réponse : heures.tv   mauvaises réponses : age, nivetud,hard.rock) ? 
+
+
+```{r exercice-supplementaire, exercise=TRUE, exercise.eval=FALSE}
+
+```
+<div id="exercice-supplementaire">
+**Indice:**  n’hésitez pas à réaliser les tutoriels idoines (dyplr à vérifier. Demander si c’est possible) en amont. La résolution de cet exercice utilise uniquement cette syntaxe, simplifiant énormément le codage.
+</div>
+
+<!--
+@commentaires : on charge hdv2003, on groupe par sexe via dplyr puis on skimme le tout
+hdv2003 %>%
+  dplyr::group_by(sexe) %>%
+  skim()
+@commentaires : on skim(hdv2003) en le chargeant dans dplyr, on sélectionne  ce que l’on veut. Ici skim_type n’est pas nécessaire mais permet de partager factor et numeric, ce qui simplifie la lisibilité
+skim(hdv2003) %>%
+  dplyr::select(skim_type, skim_variable, numeric.mean)
+
+-->
+
+```{r exercice-supplementaire-solution}
+#@VRAIE BONNE REPONSE : on charge la table, on sélectionne les variables qui nous intéressent puis on skimm et on peut conclure.
+hdv2003%>%
+  dplyr::select(freres.soeurs,heures.tv) %>%
+  skim()
+# @commentaires : on charge hdv2003, puis on le skimme et on filtre le skim_df pour n’avoir que les variables ayant des valeurs manquantes
+hdv2003 %>%
+  skim() %>%
+  dplyr::filter(n_missing > 0)
+
+```
+
+
+
 

@@ -6,6 +6,10 @@ output:
     allow_skip: true
 runtime: shiny_prerendered
 description: "Un tutoriel sur les différences entre summary() de Rbase et le package skimr"
+
+params:
+  d: !r Sys.Date()
+  
 ---
 
 ```{r setup, include=FALSE}
@@ -76,7 +80,7 @@ random_encouragementFR <- function() {
 }
 
 ```
-# Rbase vs SkimR
+# Rbase vs SkimR `r params$d`
 
 ## Statistique descriptive avec RBase {data-progressive=TRUE}
 Alors comme ça, tu veux apprendre à skimmer ? Bien, tu es au bon endroit. Dans pas longtemps, tu pourras toi aussi narguer tes camarades qui utilisent *encore* des commandes de **Rbase**. 
@@ -256,6 +260,7 @@ Réponse : Certes, la médiane est très proche de la moyenne (signe d’une fai
 <!--Début de la partie SKIM : présentation de skim rapide avant exo 4 puis exhaustive après l’exo 4-->
 
 # Partie Skim
+## Skim c'est quoi ?
 L’extension SkimR permet de fournir un résumé statistique respectant le principe de moindre surprise, afin d’éviter à l’utilisateur toute (mauvaise) surprise. La fonction skim(), très similaire à la fonction summary(), fonctionne avec des data frames et affiche des résultats pour chaque colonne( Le tableau de données doit être structuré selon le format tidy, càd les variables sont en colonne, chaque variable ne correspond qu’à une seule colonne, les observations sont en lignes. L’intersection d’une ligne et d’une colonne est alors une valeur mesurée.),les statistiques présentées dépendent du typage de la variable.
 
 ## Exercice 4
@@ -390,6 +395,7 @@ skim_without_charts(hdv2003)
 ```
 
 # Apprenez à skimmer tout seul!
+## Skim tout seul
 la fonction skim_with() permet de travailler avec ses propres statistiques, sur les variables numériques par exemple :
 
 ## Exemple 

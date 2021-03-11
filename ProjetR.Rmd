@@ -13,7 +13,7 @@ params:
 ---
 
 ```{r setup, include=FALSE}
-##### Configuration pour learnr et gradethis #####
+####### Configuration pour learnr et gradethis #######
 # install.packages("remotes") # require {remotes}
 #remotes::install_github("rstudio/learnr")
 #remotes::install_github("rstudio-education/gradethis")
@@ -21,7 +21,7 @@ library(learnr)
 library(gradethis)
 gradethis::gradethis_setup()
 
-###### Installation du package pour le tuto, chargement et récupération du jeu de données:#####
+######### Installation du package pour le tuto, chargement et récupération du jeu de données:#######
 install.packages("skimr", repos = "https://cloud.r-project.org/")
 library(skimr)
 install.packages("questionr", repos = "https://cloud.r-project.org/")
@@ -30,13 +30,13 @@ install.packages("tidyverse", repos = "https://cloud.r-project.org/")
 library(tidyverse)
 data(list="hdv2003")
 data(list="rp2012")
-####### Option des exercices #####
+########## Option des exercices #######
 tutorial_options(exercise.completion = FALSE)
 
 knitr::opts_chunk$set(echo = FALSE)
 
 
-#### Fonctions
+###### Fonctions
 random_praises <- c(
   "Quel talent!",
   "Trop fort!",
@@ -72,7 +72,10 @@ random_encouragements <- c(
   "Essaie encore, c'est le métier qui rentre",
   "Aie confiance, tu vas réussir !",
   "Pour pouvoir contempler l'arc-en-ciel, il faut d'abord endurer la pluie. Sors ton parapluie et continue !",
-  "L'échec est l'épice qui donne la saveur au succès. Continue tes efforts !"
+  "Brooks was here.",
+  "L'échec est l'épice qui donne la saveur au succès. Continue tes efforts !",
+  "Un jour, tu te diras que l'ensai, en fait, c'était facile. Mais ce jour n'arrivera que si tu réfléchis encore un peu...",
+  "Nice try, try again ! "
 )
 
 
@@ -87,10 +90,10 @@ random_encouragementFR <- function() {
 Alors comme ça, tu veux apprendre à skimmer ? Bien, tu es au bon endroit. Dans pas longtemps, tu pourras toi aussi narguer tes camarades qui utilisent *encore* des commandes de **Rbase**. 
 Bien, Mais tu le sais, un bon statisticien passe du temps à connaître son objet. Alors nous allons commencer en douceur avec un jeu de données issu de l'enquête Histoire de vie de l'Insee. Il faut bien justifier son salaire...
 
-## Connaissez-vous bien votre jeu de données ?
+### Connaissez-vous bien votre jeu de données ?
 Le jeu de données est préchargé. Il s'appelle **hdv2003**, et nous allons commencer par déterminer des éléments simples à son propos. Quelle taille fait-il ? Comment s'appellent les noms des colonnes ? De quoi sont-elles faites? ... Que des choses utiles pour la suite ! 
 
-## Prendre la dimension du problème
+### Prendre la dimension du problème
 Ton jeu de données est un *tableau* de données. Mais un tableau, c'est avant tout quelque chose de rectangulaire qui peut se décomposer en lignes et en colonnes. Eh bien! qu'allons nous faire maintenant ? ... Exact! Nous allons compter le nombre de lignes et le nombre de colonnes.
 Pour cela, nous allons utiliser la fonction **dim()** sur l'objet **hdv2003**. 
 Tu ne sais pas faire ? N'aie crainte, voici un petit exemple sur un autre jeu de données qu'il te suffira de reproduire sur le tien.
@@ -138,7 +141,7 @@ random_answer_order = TRUE
 
 
 
-## Trouvons le nom des variables
+#### Trouvons le nom des variables
 Super ! Tu as bien trouvé la forme de ton tableau de données, aussi appelé *dataframe* par nos amis outre-Manche. Sauf, que maintenant, tu aimerais en savoir plus. Ainsi, après avoir considéré ses formes, tu voudrais bien s'avoir comment il s'appelle. Il suffit de lui demander! Tu vas pouvoir obtenir le nom de chacune des variables très facilement. 
 
 Pour obtenir le nom des variables, utiliser la commande `names()` sur le jeu de données *hdv2003*:
@@ -160,7 +163,7 @@ names(hdv2003)
 ```
 
 
-### type des variables
+#### type des variables
 Enfin, pour avoir le type de variables, utiliser la fonction `str()`
 ```{r typeDesVariables, exercise=TRUE, exercise.eval=FALSE, exercise.startover = TRUE}
 
@@ -184,7 +187,7 @@ On trouve ainsi :
 - 15 variables catégorielles de type _Factor_
 - 5 variables quantitatives (3 entiers et 2 numériques)
 
-## Le facteur n’est pas passé ?
+### Le facteur n’est pas passé ?
 
 Mais qu'est-ce que c'était déjà ce _Factor_ ?
 Les facteurs (factors an anglais) sont un type de vecteur géré nativement par R et utilisés dans de nombreux domaines (modèles statistiques, représentations graphiques,…). 
@@ -200,10 +203,10 @@ levels(hdv2003$sexe)
 ```
 
 
-## Exercice 2. Montre-moi tes statistiques et je te dirai qui tu es !
+### Exercice 2. Montre-moi tes statistiques et je te dirai qui tu es !
 Maintenant que vous connaissez la structure de votre base de données, allons un peu plus loin dans sa description statistique.
 
-### Allons plus loin...
+#### Allons plus loin...
 
 A l’aide d’une commande dédiée issue de Rbase (autrement dit, sans recourir à l’utilisation d’un package annexe), essayez de produire les principales statistiques descriptives du jeu de données hdv2003.
 <div id="allonsplusloin">
@@ -223,7 +226,7 @@ summary(hdv2003)
 En effet, pour obtenir des statistiques élémentaires à partir des fonctionnalités de Rbase, on utilise la fonction summary().
 La fonction summary() offre une information statistique exhaustive sur l’ensemble des variables de la table.
 
-### trop de décimales ?
+#### trop de décimales ?
 Le nombre de décimales des sorties ne vous convient pas ? Il est alors possible de spécifier le nombre de chiffres à afficher grâce au paramètre digits. Par exemple, si je voulais obtenir 2 chiffres après la virgule lors de mon _summary()_ sur le jeu de données *rp2012*, j'eus écris  `summary(rp2012, digits = 2)`. 
 
 S'il vous plaît, faites en sorte d'appliquer la fonction `summary()` sur le jeu de données **hdv2003** mais en limitant le nombre de décimales à 3 chiffres après la virgule.
@@ -240,7 +243,7 @@ summary(hdv2003, digits = 3)
 ```
 
 
-## Exercice 3 Focus sur une ou plusieurs variables d’intérêt
+### Exercice 3 Focus sur une ou plusieurs variables d’intérêt
 La fonction summary() produit un résumé statistique de toutes vos variables. Il est cependant possible de cibler une variable d’intérêt dans votre analyse. Pour cibler une variable de la sorte, il suffit de taper summary(Nom_de_la_table$Nom_de_la_variable).
 
 Selon le même principe, produisez les principales statistiques de la variable **âge**.
@@ -251,7 +254,7 @@ Selon le même principe, produisez les principales statistiques de la variable *
 ```{r exo3-solution}
 summary(hdv2003$age)
 ```
-### un petit quizz
+#### un petit quizz
 ```{r quizzexo3, echo=FALSE}
 quiz(caption = "Summary et l'allure de la distribution",
   question(text = "A partir des résultats de la fonction summary(), pouvez-vous dire quelque chose sur l’allure générale de la distribution de cette variable ? (plusieurs réponses possibles)",
@@ -271,12 +274,12 @@ quiz(caption = "Summary et l'allure de la distribution",
 
 <!--Début de la partie SKIM : présentation de skim rapide avant exo 4 puis exhaustive après l’exo 4-->
 
-# Partie Skim
-## Skim c'est quoi ?
+## Skimmons un peu
+### Skim c'est quoi ?
 L’extension **SkimR** permet de fournir un résumé statistique respectant le principe de moindre surprise, afin d’éviter à l’utilisateur toute (mauvaise) surprise.
 La fonction  `skim()`, très similaire à la fonction `summary()`, fonctionne avec des _data frames_ et affiche des résultats pour chaque colonne( Le tableau de données doit être structuré selon le format tidy, autrement dit les variables sont en colonnes, chaque variable ne correspond qu’à une seule colonne, les observations sont en lignes. L’intersection d’une ligne et d’une colonne est alors une valeur mesurée.),les statistiques présentées dépendent du typage de la variable.
 
-## Exercice 4 Laissez moi skimmer.
+### Exercice 4 Laissez moi skimmer.
 Nous allons afficher les principales statistiques descriptives de votre jeu de données complet, en recourant cette fois-ci au package **skimR** et à sa fonction `skim()`. Pour cela, rien de plus simple. Nous avons déjà installé et chargé le package skimR pour vous, public. 
 Il ne reste plus qu'à appliquer la fonction `skim()` au jeu de données **hdv2003**. 
 C'est ton moment... mais je te conseille de mettre ta fenêtre en plein écran si ce n'est pas déjà le cas. Skim, c'est un spectacle.
@@ -292,7 +295,7 @@ skim(...)
 skim(hdv2003)
 ```
 
-### Mais qu'est-skim s'est passé ? 
+#### Mais qu'est-skim s'est passé ? 
 
 La fonction skim() fournit **deux** tableaux de paramètres distincts, en fonction du type des variables. 
 
@@ -321,7 +324,7 @@ On retrouve pour les variables **catégorielles** :
 * **ordered**: si la variable est ordonnée, TRUE est affiché, FALSE sinon.  
     
 
-### *Ce que les autres font, nous avons toujours l'impression que nous pourrions le faire mieux.* Cioran
+#### *Ce que les autres font, nous avons toujours l'impression que nous pourrions le faire mieux.* Cioran
 
 L’avantage de `skim()` par rapport à `summary()` est la pertinence des paramètres de dispersion et de position, qui sont les plus usuels pour un statisticien. Chaque type de données est présenté séparément. SkimR peut gérer les valeurs booléennes, les dates et bien d’autres types ( numérique, caractère, factor, booléen, complexes, dates, POSIXct (date avec temps, par exemple 2021-02-26 23:45 GMT), ts (des séries temporelles)et supporte les spark-bar et les spark-line (Graphiques dans les cellules du data frame, qui ne doivent donc pas être considérés comme des valeurs)
 .  De plus, l’histogramme permet de rapidement regarder si la distribution de la variable choisie s’éloigne d’une distribution normale, souvent plus parlant qu’une p-value.
@@ -333,7 +336,7 @@ SkimR retourne un objet skim_df ( I.e. skim data frame). Ce dernier peut notamme
 <!--Rappel des différences entre skim et summary-->
 Quelles différences observez-vous entre les 2 sorties ? Prenez quelques instants pour réfléchir puis comparez votre réflexion avec les informations suivantes : 
 
-## Exercice 5 
+### Exercice 5 
 
 ```{r exo5, exercise = TRUE, exercise.eval = FALSE}
 
@@ -351,7 +354,7 @@ Quelles différences observez-vous entre les 2 sorties ? Prenez quelques instant
 Skimr étant compatible avec le tidyverse, d’autres syntaxes peuvent être utilisées. Par exemple, pour sélectionner des variables d’une table, on peut les lister après avoir nommé la table mère :
 on peut remplacer la syntaxe table_mère$colonne_choisie1 par table_mère, colonnechoisie1. 
 
-## Exercice 5 bis
+### Exercice 5 bis
 Réalisez une analyse descriptive de la variable age de la table hdv2003
 
 ```{r exo5bis, exercise = TRUE, exercise.eval = FALSE}
@@ -366,12 +369,12 @@ skim(hdv2003,age) #utilisation de la syntaxe tidyselect
 
 ```
 
-### suite
+#### suite
 SkimR peut sembler rigide au premier abord. Cependant, il est possible de personnaliser les sorties et, surtout, de préciser les statistiques qui nous intéressent le plus. Nous pouvons donc remplacer, supprimer ou ajouter nos propres statistiques dans le but de simplifier encore plus son utilisation. Pour cela, il faut créer une liste de fonctions skim sfl() associée à un typage particulier de données puis les implémenter grâce à la fonction skim_with(). Pour revenir à tout moment à la configuration de base de skim_with(), il est possible de restaurer les paramètres par défaut grâce à la fonction skim_with_defaults(). 
 
 <!--encore un rappel de la différence entre summary et skim-->
 
-## Exercice 6 Une fonction qui a de l'allure
+### Exercice 6 Une fonction qui a de l'allure
 
 Désormais, à l’aide des sorties de la fonction skim(), que pouvez-vous dire à nouveau sur la distribution de la variable âge et que ne le permettait pas la fonction summary ?
 
@@ -391,11 +394,11 @@ library("ggpubr")
 ggqqplot(hdv2003$age)
 
 -->
-### QQ-plot
+#### QQ-plot
 QQ-plot de la variable âge pour attester de la normalité de sa distribution (bien que les queues de distribution, à gauche notamment, s’écartent légèrement de la distribution normale théorique).
 
 <!-- début d’utilisation de skim_with, mise en pratique simpliste du texte précédent l’exo 6 -->
-## Exercice 7 Enlever l'histogramme de la sortie skim (déshabillez-moi!)
+### Exercice 7 Enlever l'histogramme de la sortie skim (déshabillez-moi!)
 
 Enlever l’histogramme de la sortie skim
 
@@ -419,11 +422,11 @@ skim_without_charts(hdv2003)
 # Skim_with() est une fonction qui produit une fonction, skim_with() est clôturée au sens mathématique ; il est donc possible d’en créer plusieurs dans une même session R. Néanmoins, il faut assigner la sortie de skim_with() avant de ne pouvoir l'utiliser. 
 ```
 
-# Apprenez à skimmer tout seul!
-## Skim tout seul
+## Apprenez à skimmer tout seul!
+### Skim tout seul
 la fonction skim_with() permet de travailler avec ses propres statistiques, sur les variables numériques par exemple :
 
-## Exemple 
+### Exemple 
 #commentaires : on choisit pour les variables numériques d’écraser les stats fournies initialement par skim_with(append=False) et de mettre l’écart interquartile et l’écart absolu à la médiane. On stocke ce skim_with() afin de pouvoir l’utiliser comme une fonction. on  peut utiliser la manière est directe, on déclare les nouvelles stats en même temps que le skim_with() ou on peut créer la liste de stat qu’on stocke, puis on crée le skim_with().
 
 <!-- @commentaires : on ne veut que sd et median, on les liste pour les variables numériques, et on écrase (append=False)-->
@@ -461,7 +464,7 @@ mon_skim_2(hdv2003)
 ```
 <!--@application de l’exemple précédent-->
 
-## Exercice 8
+### Exercice 8
 Pour les variables de type numérique, ajoutez l’écart interquartile en prenant soin de supprimer les valeurs manquantes. Pour les variables de type facteur, déterminez le nombre d’éléments unique. 
 
 Dans un autre skim, n’affichez que l’écart absolu à la médiane pour la variable poids.
@@ -485,7 +488,7 @@ mon_skim_mad(hdv2003$poids)
 
 
 ```
-### compléments
+#### compléments
 
 SkimR peut ainsi être combiné avec d’autres packages tels que tydiverse ou dplyr
 
@@ -493,7 +496,7 @@ La fonction skim() est compatible avec les fonctions de manipulation de données
 La syntaxe est la suivante : les lignes faisant parties du bloc à traiter doivent être chacune suivies de” %>%” sauf la dernière qui marque la fin du bloc. Les fonctions utilisées doivent être précédées de “dplyr:: “
 Pour regrouper, la fonction de dplyr est group_by(), select() pour sélectionner des variables et filter() pour filtrer les informations désirées.
 
-## Exercice supplémentaire
+### Exercice supplémentaire
 Skim fonctionne très bien avec les groupements. Réalisez un skim() de la table hdv2003 en regroupant les informations par sexe. Puis, entre la variable comptabilisant le nombre de frères et sœurs et celle comptabilisant le nombre d’heures passées devant la télévision, laquelle a la valeur moyenne la plus élevée (freres.soeurs)?La table hdv2003 comporte-t-elle des valeurs manquantes (réponse : heures.tv   mauvaises réponses : age, nivetud,hard.rock) ? 
 
 

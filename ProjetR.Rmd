@@ -499,7 +499,7 @@ hdv2003%>%
 hdv2003 %>%
   skim() %>%
   dplyr::filter(n_missing > 0)
-#zizipanpan
+
 
 ```
 

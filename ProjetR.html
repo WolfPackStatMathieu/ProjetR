@@ -173,10 +173,8 @@ Pour obtenir le nom des variables, utiliser la commande <code>names()</code> sur
 <div class="tutorial-exercise-support" data-label="nomDesVariables-solution" data-completion="0" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>names(hdv2003)</code></pre>
 </div>
-<p>##une modif après update git</p>
-</div>
-<div id="section-type-des-variables" class="section level2">
-<h2>type des variables</h2>
+<div id="section-type-des-variables" class="section level3">
+<h3>type des variables</h3>
 Enfin, pour avoir le type de variables, utiliser la fonction <code>str()</code>
 <div class="tutorial-exercise" data-label="typeDesVariables" data-completion="0" data-diagnostics="1" data-startover="1" data-lines="0">
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
@@ -192,9 +190,14 @@ str(...)</code></pre>
 <pre class="text"><code>str(hdv2003)</code></pre>
 </div>
 <p>Comme vous le constatez, str() est une fonction bien plus complète que names().</p>
-<p>On trouve ainsi : - 15 variables catégorielles de type factor - 5 variables quantitatives (3 entiers et 2 numériques) ## Le facteur n’est pas passé ? Les facteurs (factors an anglais) sont un type de vecteur géré nativement par R et utilisés dans de nombreux domaines (modèles statistiques, représentations graphiques,…).</p>
+<p>On trouve ainsi : - 15 variables catégorielles de type <em>Factor</em> - 5 variables quantitatives (3 entiers et 2 numériques)</p>
+</div>
+</div>
+<div id="section-le-facteur-nest-pas-passé" class="section level2">
+<h2>Le facteur n’est pas passé ?</h2>
+<p>Mais qu’est-ce que c’était déjà ce <em>Factor</em> ? Les facteurs (factors an anglais) sont un type de vecteur géré nativement par R et utilisés dans de nombreux domaines (modèles statistiques, représentations graphiques,…).</p>
 <p>Les facteurs prennent leurs valeurs dans un ensemble de modalités prédéfinies et ne peuvent en prendre d’autres. La liste des valeurs possibles est donnée par la fonction levels.</p>
-<p>Par exemple, ici :</p>
+<p>Par exemple, ici il suffit de lancer le code pour connaître les valeurs possibles de la variable <em>sexe</em>:</p>
 <div class="tutorial-exercise" data-label="exemple-facteur" data-completion="0" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>levels(hdv2003$sexe)</code></pre>
 <pre><code>[1] &quot;Homme&quot; &quot;Femme&quot;</code></pre>
@@ -205,10 +208,16 @@ str(...)</code></pre>
 <h2>Exercice 2. Montre-moi tes statistiques et je te dirai qui tu es !</h2>
 <p>Maintenant que vous connaissez la structure de votre base de données, allons un peu plus loin dans sa description statistique.</p>
 <div id="section-allons-plus-loin" class="section level3">
-<h3>allons plus loin</h3>
-<p>A l’aide d’une commande dédiée issue de Rbase (autrement dit, sans recourir à l’utilisation d’un package annexe), produire les principales statistiques descriptives du jeu de données hdv2003</p>
+<h3>Allons plus loin…</h3>
+A l’aide d’une commande dédiée issue de Rbase (autrement dit, sans recourir à l’utilisation d’un package annexe), essayez de produire les principales statistiques descriptives du jeu de données hdv2003.
+<div id="section-allonsplusloin">
+<p><strong>Indice:</strong> Si je traduisais le nom de la fonction en français, j’obtiendrais <em>résumé</em>.</p>
+</div>
 <div class="tutorial-exercise" data-label="qui-tu-es" data-completion="0" data-diagnostics="1" data-startover="1" data-lines="0">
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="qui-tu-es-hint-1" data-completion="0" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>summary(...)</code></pre>
 </div>
 <div class="tutorial-exercise-support" data-label="qui-tu-es-solution" data-completion="0" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>summary(hdv2003)</code></pre>
@@ -217,9 +226,13 @@ str(...)</code></pre>
 </div>
 <div id="section-trop-de-décimales" class="section level3">
 <h3>trop de décimales ?</h3>
-Le nombre de décimales des sorties ne vous convient pas ? Il est alors possible de spécifier le nombre de chiffres à afficher grâce au paramètre digits.
+<p>Le nombre de décimales des sorties ne vous convient pas ? Il est alors possible de spécifier le nombre de chiffres à afficher grâce au paramètre digits. Par exemple, si je voulais obtenir 2 chiffres après la virgule lors de mon <em>summary()</em> sur le jeu de données <em>rp2012</em>, j’eus écris <code>summary(rp2012, digits = 2)</code>.</p>
+S’il vous plaît, faites en sorte d’appliquer la fonction <code>summary()</code> sur le jeu de données <strong>hdv2003</strong> mais en limitant le nombre de décimales à 3 chiffres après la virgule.
 <div class="tutorial-exercise" data-label="decimales" data-completion="0" data-diagnostics="1" data-startover="1" data-lines="0">
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="decimales-hint-1" data-completion="0" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>summary(hdv2003, ... = )</code></pre>
 </div>
 <div class="tutorial-exercise-support" data-label="decimales-solution" data-completion="0" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>summary(hdv2003, digits = 3)</code></pre>
@@ -238,7 +251,7 @@ Selon le même principe, produisez les principales statistiques de la variable <
 </div>
 <div id="section-un-petit-quizz" class="section level3">
 <h3>un petit quizz</h3>
-<p><div class="panel-heading tutorial-quiz-title">Un joli quiz</div></p>
+<p><div class="panel-heading tutorial-quiz-title">Summary et l&#39;allure de la distribution</div></p>
 <div class="panel panel-default">
 <div data-label="quizzexo3-1" class="tutorial-question panel-body">
 <div id="quizzexo3-1-answer_container" class="shiny-html-output"></div>
@@ -247,8 +260,6 @@ Selon le même principe, produisez les principales statistiques de la variable <
 <script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
 </div>
 </div>
-<p>QCM: A partir des résultats de la fonction summary(), pouvez-vous dire quelque chose sur l’allure générale de la distribution de cette variable ? Non, et je ne sais pas pourquoi Oui, et je ne sais pas quoi ajouter Non, on ne peut rien dire sur l’allure générale de la distribution La médiane est très proche de la moyenne (signe d’une faible dispersion)</p>
-<p>Réponse : Certes, la médiane est très proche de la moyenne (signe d’une faible dispersion), mais on ne peut rien conclure d’autre sur l’allure générale de la distribution.</p>
 <!--Début de la partie SKIM : présentation de skim rapide avant exo 4 puis exhaustive après l’exo 4-->
 </div>
 </div>
@@ -257,29 +268,67 @@ Selon le même principe, produisez les principales statistiques de la variable <
 <h1>Partie Skim</h1>
 <div id="section-skim-cest-quoi" class="section level2">
 <h2>Skim c’est quoi ?</h2>
-<p>L’extension SkimR permet de fournir un résumé statistique respectant le principe de moindre surprise, afin d’éviter à l’utilisateur toute (mauvaise) surprise. La fonction skim(), très similaire à la fonction summary(), fonctionne avec des data frames et affiche des résultats pour chaque colonne( Le tableau de données doit être structuré selon le format tidy, càd les variables sont en colonne, chaque variable ne correspond qu’à une seule colonne, les observations sont en lignes. L’intersection d’une ligne et d’une colonne est alors une valeur mesurée.),les statistiques présentées dépendent du typage de la variable.</p>
+<p>L’extension <strong>SkimR</strong> permet de fournir un résumé statistique respectant le principe de moindre surprise, afin d’éviter à l’utilisateur toute (mauvaise) surprise. La fonction <code>skim()</code>, très similaire à la fonction <code>summary()</code>, fonctionne avec des <em>data frames</em> et affiche des résultats pour chaque colonne( Le tableau de données doit être structuré selon le format tidy, autrement dit les variables sont en colonnes, chaque variable ne correspond qu’à une seule colonne, les observations sont en lignes. L’intersection d’une ligne et d’une colonne est alors une valeur mesurée.),les statistiques présentées dépendent du typage de la variable.</p>
 </div>
-<div id="section-exercice-4" class="section level2">
-<h2>Exercice 4</h2>
-Afficher les principales statistiques descriptives de votre jeu de données complet, en recourant cette fois-ci au package skimR et à sa fonction skim()
+<div id="section-exercice-4-laissez-moi-skimmer." class="section level2">
+<h2>Exercice 4 Laissez moi skimmer.</h2>
+<p>Nous allons afficher les principales statistiques descriptives de votre jeu de données complet, en recourant cette fois-ci au package <strong>skimR</strong> et à sa fonction <code>skim()</code>. Pour cela, rien de plus simple. Nous avons déjà installé et chargé le package skimR pour vous, public. Il ne reste plus qu’à appliquer la fonction <code>skim()</code> au jeu de données <strong>hdv2003</strong>. C’est ton moment… mais je te conseille de mettre ta fenêtre en plein écran si ce n’est pas déjà le cas. Skim, c’est un spectacle.</p>
 <div class="tutorial-exercise" data-label="exo4" data-completion="0" data-diagnostics="1" data-startover="1" data-lines="0">
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="exo4-hint-1" data-completion="0" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>skim(...)</code></pre>
 </div>
 <div class="tutorial-exercise-support" data-label="exo4-solution" data-completion="0" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>skim(hdv2003)</code></pre>
 </div>
-<p>La fonction skim() fournit deux tableaux de paramètres distincts, en fonction du type des variables.</p>
-<p>On retrouve pour les variables numériques : • Var : le nom de la variable • Missing : le nombre total de valeurs manquantes • Complete_rate : le taux de valeurs non-manquantes • N : le nombre total de valeurs • Mean : la moyenne arithmétiques des valeurs • Sd : l’écat-type des valeurs • Min : le minimum des valeurs • P25 : le 1er quartile des valeurs • Median : la médiane des valeurs • P75 : le 3ème quartile des valeurs • Max: le maximum des valeurs • Hist : l’histogramme de la distribution des valeurs</p>
-<p>On retrouve pour les variables catégorielles :</p>
-<pre><code>• Var :le nom de la variable
-• missing: le nombre total de valeurs manquantes
-• complete_rate: le taux de valeurs non-manquantes
-• n_unique: le nombre de modalités de la variable observée
-• top_count: le nombre de lignes pour chaque modalités et le nombre total de données manquantes
-• ordered: si la variable est ordonnée, TRUE est affiché, FALSE sinon.</code></pre>
-<div id="section-suite" class="section level3">
-<h3>suite</h3>
-<p>L’avantage de skim() par rapport à summary() est la pertinence des paramètres de dispersion et de position, qui sont les plus usuels pour un statisticien. Chaque type de données est présenté séparément. SkimR peut gérer les valeurs booléennes, les dates et bien d’autres types ( numérique, caractère, factor, booléen, complexes, dates, POSIXct (date avec temps, par exemple 2021-02-26 23:45 GMT), ts (des séries temporelles)et supporte les spark-bar et les spark-line (Graphiques dans les cellules du data frame, qui ne doivent donc pas être considérés comme des valeurs) . De plus, l’histogramme permet de rapidement regarder si la distribution de la variable choisie s’éloigne d’une distribution normale, souvent plus parlant qu’une p-value.</p>
+<div id="section-mais-quest-skim-sest-passé" class="section level3">
+<h3>Mais qu’est-skim s’est passé ?</h3>
+<p>La fonction skim() fournit <strong>deux</strong> tableaux de paramètres distincts, en fonction du type des variables.</p>
+<p>On retrouve pour les variables <strong>numériques</strong> :</p>
+<ul>
+<li><strong>Var</strong> : le nom de la variable<br />
+</li>
+<li><strong>Missing</strong> : le nombre total de valeurs manquantes<br />
+</li>
+<li><strong>Complete_rate</strong> : le taux de valeurs non-manquantes<br />
+</li>
+<li><strong>N</strong> : le nombre total de valeurs<br />
+</li>
+<li><strong>Mean</strong> : la moyenne arithmétiques des valeurs<br />
+</li>
+<li><strong>Sd</strong> : l’écat-type des valeurs<br />
+</li>
+<li><strong>Min</strong> : le minimum des valeurs<br />
+</li>
+<li><strong>P25</strong> : le 1er quartile des valeurs<br />
+</li>
+<li><strong>Median</strong> : la médiane des valeurs<br />
+</li>
+<li><strong>P75</strong> : le 3ème quartile des valeurs<br />
+</li>
+<li><strong>Max</strong> : le maximum des valeurs<br />
+</li>
+<li><strong>Hist</strong> : l’histogramme de la distribution des valeurs</li>
+</ul>
+<p>On retrouve pour les variables <strong>catégorielles</strong> :</p>
+<ul>
+<li><strong>Var</strong> :le nom de la variable<br />
+</li>
+<li><strong>missing</strong>: le nombre total de valeurs manquantes<br />
+</li>
+<li><strong>complete_rate</strong>: le taux de valeurs non-manquantes<br />
+</li>
+<li><strong>n_unique</strong>: le nombre de modalités de la variable observée<br />
+</li>
+<li><strong>top_count</strong>: le nombre de lignes pour chaqu modalités et le nombre total de données manquantes<br />
+</li>
+<li><strong>ordered</strong>: si la variable est ordonnée, TRUE est affiché, FALSE sinon.</li>
+</ul>
+</div>
+<div id="section-ce-que-les-autres-font-nous-avons-toujours-limpression-que-nous-pourrions-le-faire-mieux.-cioran" class="section level3">
+<h3><em>Ce que les autres font, nous avons toujours l’impression que nous pourrions le faire mieux.</em> Cioran</h3>
+<p>L’avantage de <code>skim()</code> par rapport à <code>summary()</code> est la pertinence des paramètres de dispersion et de position, qui sont les plus usuels pour un statisticien. Chaque type de données est présenté séparément. SkimR peut gérer les valeurs booléennes, les dates et bien d’autres types ( numérique, caractère, factor, booléen, complexes, dates, POSIXct (date avec temps, par exemple 2021-02-26 23:45 GMT), ts (des séries temporelles)et supporte les spark-bar et les spark-line (Graphiques dans les cellules du data frame, qui ne doivent donc pas être considérés comme des valeurs) . De plus, l’histogramme permet de rapidement regarder si la distribution de la variable choisie s’éloigne d’une distribution normale, souvent plus parlant qu’une p-value.</p>
 <p>SkimR retourne un objet skim_df ( I.e. skim data frame). Ce dernier peut notamment être utilisé dans un pipeline tidyverse, contrairement au retour de summary() qui est une table. Si le format large ne convient pas, on peut également utiliser to_long(nom_du_data_frame, les colonnes à skimer, les fonctions de skim skim_fun=skim) qui retourne un data frame comprenant 4 colonnes : variable, type, stat et formatted.</p>
 <!--Rappel des différences entre skim et summary-->
 <p>Quelles différences observez-vous entre les 2 sorties ? Prenez quelques instants pour réfléchir puis comparez votre réflexion avec les informations suivantes :</p>
@@ -310,7 +359,7 @@ skim(hdv2003$age)   #utilisation de la syntaxe de base
 
 skim(hdv2003,age) #utilisation de la syntaxe tidyselect</code></pre>
 </div>
-<div id="section-suite-1" class="section level3">
+<div id="section-suite" class="section level3">
 <h3>suite</h3>
 <p>SkimR peut sembler rigide au premier abord. Cependant, il est possible de personnaliser les sorties et, surtout, de préciser les statistiques qui nous intéressent le plus. Nous pouvons donc remplacer, supprimer ou ajouter nos propres statistiques dans le but de simplifier encore plus son utilisation. Pour cela, il faut créer une liste de fonctions skim sfl() associée à un typage particulier de données puis les implémenter grâce à la fonction skim_with(). Pour revenir à tout moment à la configuration de base de skim_with(), il est possible de restaurer les paramètres par défaut grâce à la fonction skim_with_defaults().</p>
 <!--encore un rappel de la différence entre summary et skim-->
@@ -1218,20 +1267,20 @@ learnr:::store_exercise_cache("jeudedonnees", list(setup = NULL, chunks = list(l
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "dim-quizz", question = structure("Combien de lignes et de colonnes contient hdv2003 ? ", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_7fba775", 
+"character")), answers = list(structure(list(id = "lnr_ans_72898c6", 
     option = "5170 lignes et 60 colonnes", value = "5170 lignes et 60 colonnes", 
     label = structure("5170 lignes et 60 colonnes", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = structure("Ne confonds tu pas avec le jeu de données de l&#39;exemple ?", html = TRUE, class = c("html", 
     "character"))), class = c("tutorial_question_answer", "tutorial_quiz_answer"
-)), structure(list(id = "lnr_ans_44580ac", option = "60 lignes et 5170 colonnes", 
+)), structure(list(id = "lnr_ans_e8fbe9", option = "60 lignes et 5170 colonnes", 
     value = "60 lignes et 5170 colonnes", label = structure("60 lignes et 5170 colonnes", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = structure("Je crois que tu confonds avec le jeu de données de l&#39;exemple, et en plus tu as inversé les lignes et les colonnes", html = TRUE, class = c("html", 
     "character"))), class = c("tutorial_question_answer", "tutorial_quiz_answer"
-)), structure(list(id = "lnr_ans_ecf10e7", option = "2000 lignes et 20 colonnes", 
+)), structure(list(id = "lnr_ans_6953872", option = "2000 lignes et 20 colonnes", 
     value = "2000 lignes et 20 colonnes", label = structure("2000 lignes et 20 colonnes", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = structure("Bravo, le monde de la statistique descriptive s&#39;ouvre à toi !", html = TRUE, class = c("html", 
     "character"))), class = c("tutorial_question_answer", "tutorial_quiz_answer"
-)), structure(list(id = "lnr_ans_af39719", option = "20 lignes et 2000 colonnes", 
+)), structure(list(id = "lnr_ans_c684e2b", option = "20 lignes et 2000 colonnes", 
     value = "20 lignes et 2000 colonnes", label = structure("20 lignes et 2000 colonnes", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = structure("Oups, je crois que tu as inversé les lignes et les colonnes !", html = TRUE, class = c("html", 
     "character"))), class = c("tutorial_question_answer", "tutorial_quiz_answer"
@@ -1243,7 +1292,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "dim-quizz-answer", question = "dim-quizz"), loading = structure("<strong>Loading:<\u002fstrong> \nCombien de lignes et de colonnes contient hdv2003 ? \n<br/><br/><br/>", html = TRUE, class = c("html", 
 "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1957051014.08868, options = list()), class = c("learnr_radio", 
+    seed = 1779183277.1715, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
@@ -1471,22 +1520,22 @@ learnr:::store_exercise_cache("exo3", list(setup = NULL, chunks = list(list(labe
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "quizzexo3-1", 
     question = structure("A partir des résultats de la fonction summary(), pouvez-vous dire quelque chose sur l’allure générale de la distribution de cette variable ? (plusieurs réponses possibles)", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_ec2084d", 
+    "character")), answers = list(structure(list(id = "lnr_ans_8c13587", 
         option = "Non, et je ne sais pas pourquoi", value = "Non, et je ne sais pas pourquoi", 
         label = structure("Non, et je ne sais pas pourquoi", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = structure("Pense à FC", html = TRUE, class = c("html", 
         "character"))), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ca427d0", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d77a14c", 
         option = "Oui, et je ne sais pas quoi ajouter", value = "Oui, et je ne sais pas quoi ajouter", 
         label = structure("Oui, et je ne sais pas quoi ajouter", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = structure("de la réflexion ?", html = TRUE, class = c("html", 
         "character"))), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_6ee8b2a", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_e6e40a5", 
         option = "Non, on ne peut rien dire sur l’allure générale de la distribution", 
         value = "Non, on ne peut rien dire sur l’allure générale de la distribution", 
         label = structure("Non, on ne peut rien dire sur l’allure générale de la distribution", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f860aa2", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_cac6cdd", 
         option = "La médiane est très proche de la moyenne (signe d’une faible dispersion)", 
         value = "La médiane est très proche de la moyenne (signe d’une faible dispersion)", 
         label = structure("La médiane est très proche de la moyenne (signe d’une faible dispersion)", html = TRUE, class = c("html", 
@@ -1496,11 +1545,11 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
     "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
     "character")), try_again = structure("Incorrect", html = TRUE, class = c("html", 
     "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
-    "character")), message = NULL, post_message = structure("Correct! Parfait", html = TRUE, class = c("html", 
+    "character")), message = NULL, post_message = structure("Correct! Magnifique !", html = TRUE, class = c("html", 
     "character"))), ids = list(answer = "quizzexo3-1-answer", 
         question = "quizzexo3-1"), loading = structure("<strong>Loading:<\u002fstrong> \nA partir des résultats de la fonction summary(), pouvez-vous dire quelque chose sur l’allure générale de la distribution de cette variable ? (plusieurs réponses possibles)\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 454343611.78843, options = list()), class = c("learnr_checkbox", 
+    seed = 1655302828.72919, options = list()), class = c("learnr_checkbox", 
 "tutorial_question")))
 </script>
  

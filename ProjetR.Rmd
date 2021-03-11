@@ -81,7 +81,8 @@ random_encouragementFR <- function() {
 
 ```
 # Rbase vs SkimR `r params$d`
-
+changement branche
+encore un changement
 ## Statistique descriptive avec RBase {data-progressive=TRUE}
 Alors comme ça, tu veux apprendre à skimmer ? Bien, tu es au bon endroit. Dans pas longtemps, tu pourras toi aussi narguer tes camarades qui utilisent *encore* des commandes de **Rbase**. 
 Bien, Mais tu le sais, un bon statisticien passe du temps à connaître son objet. Alors nous allons commencer en douceur avec un jeu de données issu de l'enquête Histoire de vie de l'Insee. Il faut bien justifier son salaire...

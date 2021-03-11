@@ -157,9 +157,9 @@ names(hdv....)
 ```{r nomDesVariables-solution}
 names(hdv2003)
 ```
-##une modif après update git
 
-## type des variables
+
+### type des variables
 Enfin, pour avoir le type de variables, utiliser la fonction `str()`
 ```{r typeDesVariables, exercise=TRUE, exercise.eval=FALSE, exercise.startover = TRUE}
 
@@ -180,42 +180,60 @@ str(hdv2003)
 Comme vous le constatez, str() est une fonction bien plus complète que names().
 
 On trouve ainsi :
-- 15 variables catégorielles de type factor
+- 15 variables catégorielles de type _Factor_
 - 5 variables quantitatives (3 entiers et 2 numériques)
+
 ## Le facteur n’est pas passé ?
+
+Mais qu'est-ce que c'était déjà ce _Factor_ ?
 Les facteurs (factors an anglais) sont un type de vecteur géré nativement par R et utilisés dans de nombreux domaines (modèles statistiques, représentations graphiques,…). 
 
 Les facteurs prennent leurs valeurs dans un ensemble de modalités prédéfinies et ne peuvent en prendre d’autres. 
 La liste des valeurs possibles est donnée par la fonction levels.
 
-Par exemple, ici :
+Par exemple, ici il suffit de lancer le code pour connaître les valeurs possibles de la variable _sexe_:
 
 
 ```{r exemple-facteur, exercise = TRUE, exercise.eval = TRUE, exercise.startover = TRUE}
 levels(hdv2003$sexe)
 ```
 
+
 ## Exercice 2. Montre-moi tes statistiques et je te dirai qui tu es !
 Maintenant que vous connaissez la structure de votre base de données, allons un peu plus loin dans sa description statistique.
 
-### allons plus loin
+### Allons plus loin...
 
-A l’aide d’une commande dédiée issue de Rbase (autrement dit, sans recourir à l’utilisation d’un package annexe), produire les principales statistiques descriptives du jeu de données hdv2003
-
+A l’aide d’une commande dédiée issue de Rbase (autrement dit, sans recourir à l’utilisation d’un package annexe), essayez de produire les principales statistiques descriptives du jeu de données hdv2003.
+<div id="allonsplusloin">
+**Indice:** Si je traduisais le nom de la fonction en français, j'obtiendrais _résumé_. 
+</div>
 ```{r qui-tu-es, exercise=TRUE, exercise.eval=FALSE}
 
 ```
+```{r qui-tu-es-hint-1}
+summary(...)
+```
+
 ```{r qui-tu-es-solution}
 summary(hdv2003)
 ```
+
 En effet, pour obtenir des statistiques élémentaires à partir des fonctionnalités de Rbase, on utilise la fonction summary().
 La fonction summary() offre une information statistique exhaustive sur l’ensemble des variables de la table.
 
 ### trop de décimales ?
-Le nombre de décimales des sorties ne vous convient pas ? Il est alors possible de spécifier le nombre de chiffres à afficher grâce au paramètre digits.
+Le nombre de décimales des sorties ne vous convient pas ? Il est alors possible de spécifier le nombre de chiffres à afficher grâce au paramètre digits. Par exemple, si je voulais obtenir 2 chiffres après la virgule lors de mon _summary()_ sur le jeu de données *rp2012*, j'eus écris  `summary(rp2012, digits = 2)`. 
+
+S'il vous plaît, faites en sorte d'appliquer la fonction `summary()` sur le jeu de données **hdv2003** mais en limitant le nombre de décimales à 3 chiffres après la virgule.
 ```{r decimales, exercise=TRUE, exercise.eval=FALSE}
 
 ```
+```{r decimales-hint-1}
+summary(hdv2003, ... = )
+
+```
+
 ```{r decimales-solution}
 summary(hdv2003, digits = 3)
 ```
@@ -234,7 +252,7 @@ summary(hdv2003$age)
 ```
 ### un petit quizz
 ```{r quizzexo3, echo=FALSE}
-quiz(caption = "Un joli quiz",
+quiz(caption = "Summary et l'allure de la distribution",
   question(text = "A partir des résultats de la fonction summary(), pouvez-vous dire quelque chose sur l’allure générale de la distribution de cette variable ? (plusieurs réponses possibles)",
     answer(text = "Non, et je ne sais pas pourquoi", message = "Pense à FC"),
     answer(text = "Oui, et je ne sais pas quoi ajouter", message = "de la réflexion ?" ),
@@ -248,57 +266,63 @@ quiz(caption = "Un joli quiz",
   
 )
 ```
-QCM:
-A partir des résultats de la fonction summary(), pouvez-vous dire quelque chose sur l’allure générale de la distribution de cette variable ?
-Non, et je ne sais pas pourquoi
-Oui, et je ne sais pas quoi ajouter
-Non, on ne peut rien dire sur l’allure générale de la distribution
-La médiane est très proche de la moyenne (signe d’une faible dispersion)
 
-Réponse : Certes, la médiane est très proche de la moyenne (signe d’une faible dispersion), mais on ne peut rien conclure d’autre sur l’allure générale de la distribution.
 
 <!--Début de la partie SKIM : présentation de skim rapide avant exo 4 puis exhaustive après l’exo 4-->
 
 # Partie Skim
 ## Skim c'est quoi ?
-L’extension SkimR permet de fournir un résumé statistique respectant le principe de moindre surprise, afin d’éviter à l’utilisateur toute (mauvaise) surprise. La fonction skim(), très similaire à la fonction summary(), fonctionne avec des data frames et affiche des résultats pour chaque colonne( Le tableau de données doit être structuré selon le format tidy, càd les variables sont en colonne, chaque variable ne correspond qu’à une seule colonne, les observations sont en lignes. L’intersection d’une ligne et d’une colonne est alors une valeur mesurée.),les statistiques présentées dépendent du typage de la variable.
+L’extension **SkimR** permet de fournir un résumé statistique respectant le principe de moindre surprise, afin d’éviter à l’utilisateur toute (mauvaise) surprise.
+La fonction  `skim()`, très similaire à la fonction `summary()`, fonctionne avec des _data frames_ et affiche des résultats pour chaque colonne( Le tableau de données doit être structuré selon le format tidy, autrement dit les variables sont en colonnes, chaque variable ne correspond qu’à une seule colonne, les observations sont en lignes. L’intersection d’une ligne et d’une colonne est alors une valeur mesurée.),les statistiques présentées dépendent du typage de la variable.
 
-## Exercice 4
-Afficher les principales statistiques descriptives de votre jeu de données complet, en recourant cette fois-ci au package skimR et à sa fonction skim()
+## Exercice 4 Laissez moi skimmer.
+Nous allons afficher les principales statistiques descriptives de votre jeu de données complet, en recourant cette fois-ci au package **skimR** et à sa fonction `skim()`. Pour cela, rien de plus simple. Nous avons déjà installé et chargé le package skimR pour vous, public. 
+Il ne reste plus qu'à appliquer la fonction `skim()` au jeu de données **hdv2003**. 
+C'est ton moment... mais je te conseille de mettre ta fenêtre en plein écran si ce n'est pas déjà le cas. Skim, c'est un spectacle.
+
 ```{r exo4, exercise=TRUE, exercise.eval=FALSE}
 
+```
+```{r exo4-hint-1}
+skim(...)
 ```
 
 ```{r exo4-solution}
 skim(hdv2003)
 ```
-La fonction skim() fournit deux tableaux de paramètres distincts, en fonction du type des variables. 
 
-On retrouve pour les variables numériques :
-    • Var : le nom de la variable
-    • Missing : le nombre total de valeurs manquantes
-    • Complete_rate : le taux de valeurs non-manquantes
-    • N : le nombre total de valeurs
-    • Mean : la moyenne arithmétiques des valeurs
-    • Sd : l’écat-type des valeurs
-    • Min : le minimum des valeurs
-    • P25 : le 1er quartile des valeurs
-    • Median : la médiane des valeurs
-    • P75 : le 3ème quartile des valeurs
-    • Max: le maximum des valeurs
-    • Hist : l’histogramme de la distribution des valeurs
+### Mais qu'est-skim s'est passé ? 
 
-On retrouve pour les variables catégorielles :
+La fonction skim() fournit **deux** tableaux de paramètres distincts, en fonction du type des variables. 
 
-    • Var :le nom de la variable
-    • missing: le nombre total de valeurs manquantes
-    • complete_rate: le taux de valeurs non-manquantes
-    • n_unique: le nombre de modalités de la variable observée
-    • top_count: le nombre de lignes pour chaque modalités et le nombre total de données manquantes
-    • ordered: si la variable est ordonnée, TRUE est affiché, FALSE sinon.
+On retrouve pour les variables **numériques** : 
 
-### suite
-L’avantage de skim() par rapport à summary() est la pertinence des paramètres de dispersion et de position, qui sont les plus usuels pour un statisticien. Chaque type de données est présenté séparément. SkimR peut gérer les valeurs booléennes, les dates et bien d’autres types ( numérique, caractère, factor, booléen, complexes, dates, POSIXct (date avec temps, par exemple 2021-02-26 23:45 GMT), ts (des séries temporelles)et supporte les spark-bar et les spark-line (Graphiques dans les cellules du data frame, qui ne doivent donc pas être considérés comme des valeurs)
+* **Var** : le nom de la variable  
+* **Missing** : le nombre total de valeurs manquantes  
+* **Complete_rate** : le taux de valeurs non-manquantes  
+* **N** : le nombre total de valeurs  
+* **Mean** : la moyenne arithmétiques des valeurs  
+* **Sd** : l’écat-type des valeurs  
+* **Min** : le minimum des valeurs  
+* **P25** : le 1er quartile des valeurs   
+* **Median** : la médiane des valeurs  
+* **P75** : le 3ème quartile des valeurs  
+* **Max** : le maximum des valeurs  
+* **Hist** : l’histogramme de la distribution des valeurs  
+
+On retrouve pour les variables **catégorielles** :
+
+* **Var** :le nom de la variable  
+* **missing**: le nombre total de valeurs manquantes  
+* **complete_rate**: le taux de valeurs non-manquantes  
+* **n_unique**: le nombre de modalités de la variable observée  
+* **top_count**: le nombre de lignes pour chaqu modalités et le nombre total de données manquantes  
+* **ordered**: si la variable est ordonnée, TRUE est affiché, FALSE sinon.  
+    
+
+### *Ce que les autres font, nous avons toujours l'impression que nous pourrions le faire mieux.* Cioran
+
+L’avantage de `skim()` par rapport à `summary()` est la pertinence des paramètres de dispersion et de position, qui sont les plus usuels pour un statisticien. Chaque type de données est présenté séparément. SkimR peut gérer les valeurs booléennes, les dates et bien d’autres types ( numérique, caractère, factor, booléen, complexes, dates, POSIXct (date avec temps, par exemple 2021-02-26 23:45 GMT), ts (des séries temporelles)et supporte les spark-bar et les spark-line (Graphiques dans les cellules du data frame, qui ne doivent donc pas être considérés comme des valeurs)
 .  De plus, l’histogramme permet de rapidement regarder si la distribution de la variable choisie s’éloigne d’une distribution normale, souvent plus parlant qu’une p-value.
 
 SkimR retourne un objet skim_df ( I.e. skim data frame). Ce dernier peut notamment être utilisé dans un pipeline tidyverse, contrairement au retour de summary() qui est une table. Si le format large ne convient pas, on peut également utiliser to_long(nom_du_data_frame, les colonnes à skimer, les fonctions de skim skim_fun=skim) qui retourne un data frame comprenant 4 colonnes : variable, type, stat et formatted.

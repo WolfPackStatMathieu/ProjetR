@@ -32,7 +32,8 @@ data(list="hdv2003")
 data(list="rp2012")
 ########## Option des exercices #######
 tutorial_options(exercise.completion = FALSE)
-
+tutorial_options(exercise.timelimit = 60)
+tutorial_options(exercise.eval = FALSE)
 knitr::opts_chunk$set(echo = FALSE)
 
 
@@ -84,6 +85,25 @@ random_encouragementFR <- function() {
 }
 
 ```
+
+<!-- Aide pour Coder  -->
+<!-- Structure de base des solutions -->
+
+<!-- ```{r MonExercice-hint-1} -->
+
+<!-- ``` -->
+<!-- ```{r MonExercice-hint-2} -->
+
+<!-- ``` -->
+<!-- ```{r MonExercice-solution} -->
+
+<!-- ``` -->
+<!-- ```{r MonExercice-code-check} -->
+<!-- grade_code(glue_correct = random_praiseFR()) -->
+<!-- ``` -->
+
+
+
 # Rbase vs SkimR `r params$d`
 
 ## Statistique descriptive avec RBase {data-progressive=TRUE}
@@ -119,7 +139,7 @@ dim(hdv2003)
 <div id="jeudedonnees">
 **Indice:** Tu peux trouver un indice puis la solution en cliquant sur l'ampoule!
 </div>
-
+### Souviens-toi le dim() dernier
 ```{r jeudedonnees-code-check}
 grade_code(glue_correct = random_praiseFR())
 ```
@@ -141,8 +161,8 @@ random_answer_order = TRUE
 
 
 
-#### Trouvons le nom des variables
-Super ! Tu as bien trouvé la forme de ton tableau de données, aussi appelé *dataframe* par nos amis outre-Manche. Sauf, que maintenant, tu aimerais en savoir plus. Ainsi, après avoir considéré ses formes, tu voudrais bien s'avoir comment il s'appelle. Il suffit de lui demander! Tu vas pouvoir obtenir le nom de chacune des variables très facilement. 
+### Trouvons le nom des variables
+Super ! Tu as bien trouvé la forme de ton tableau de données, aussi appelé *dataframe* par nos amis outre-Manche. Sauf, que maintenant, tu aimerais en savoir plus. Ainsi, après avoir considéré ses formes, tu voudrais bien savoir comment il s'appelle. Il suffit de lui demander! Tu vas pouvoir obtenir le nom de chacune des variables très facilement. 
 
 Pour obtenir le nom des variables, utiliser la commande `names()` sur le jeu de données *hdv2003*:
 ```{r nomDesVariables, exercise = TRUE, exercise.eval=FALSE, exercise.startover = TRUE}
@@ -151,7 +171,6 @@ Pour obtenir le nom des variables, utiliser la commande `names()` sur le jeu de 
 <div id="nomDesVariables-hint-2">
 **Indice:** Il va falloir utiliser le jeu de données `hdv2003` à l'intérieur de la fonction  names()`.
 </div>
-
 ```{r nomDesVariables-hint-1}
 names(...)
 ```
@@ -161,9 +180,12 @@ names(hdv....)
 ```{r nomDesVariables-solution}
 names(hdv2003)
 ```
+```{r nomDesVariables-code-check}
+grade_code(glue_correct = random_praiseFR())
+```
 
 
-#### type des variables
+### Non mais t'as vu ce type ?!
 Enfin, pour avoir le type de variables, utiliser la fonction `str()`
 ```{r typeDesVariables, exercise=TRUE, exercise.eval=FALSE, exercise.startover = TRUE}
 
@@ -176,12 +198,17 @@ Enfin, pour avoir le type de variables, utiliser la fonction `str()`
 str(...)
 
 ```
-
-
 ```{r typeDesVariables-solution}
 str(hdv2003)
 ```
-Comme vous le constatez, str() est une fonction bien plus complète que names().
+```{r typeDesVariables-code-check}
+grade_code(glue_correct = random_praiseFR())
+```
+
+
+
+### Résumons un peu
+Comme vous le constatez,  `str()` est une fonction bien plus complète que `names()`.
 
 On trouve ainsi :
 - 15 variables catégorielles de type _Factor_
@@ -198,9 +225,19 @@ La liste des valeurs possibles est donnée par la fonction levels.
 Par exemple, ici il suffit de lancer le code pour connaître les valeurs possibles de la variable _sexe_:
 
 
-```{r exemple-facteur, exercise = TRUE, exercise.eval = TRUE, exercise.startover = TRUE}
+```{r exemple-facteur, exercise = FALSE, exercise.eval = TRUE, exercise.startover = TRUE}
 levels(hdv2003$sexe)
 ```
+
+```
+```{r MonExercice-solution,  exercise.reveal_solution = FALSE}
+levels(hdv2003$sexe)
+```
+```{r MonExercice-code-check}
+grade_code(glue_correct = random_praiseFR())
+```
+
+
 
 
 ### Exercice 2. Montre-moi tes statistiques et je te dirai qui tu es !
@@ -212,7 +249,7 @@ A l’aide d’une commande dédiée issue de Rbase (autrement dit, sans recouri
 <div id="allonsplusloin">
 **Indice:** Si je traduisais le nom de la fonction en français, j'obtiendrais _résumé_. 
 </div>
-```{r qui-tu-es, exercise=TRUE, exercise.eval=FALSE}
+```{r qui-tu-es, exercise=TRUE, exercise.eval=FALSE, exercise.startover = TRUE}
 
 ```
 ```{r qui-tu-es-hint-1}
@@ -222,15 +259,19 @@ summary(...)
 ```{r qui-tu-es-solution}
 summary(hdv2003)
 ```
+```{r qui-tu-es-solution-code-check}
+grade_code(glue_correct = random_praiseFR())
+```
 
+### Explications:
 En effet, pour obtenir des statistiques élémentaires à partir des fonctionnalités de Rbase, on utilise la fonction summary().
 La fonction summary() offre une information statistique exhaustive sur l’ensemble des variables de la table.
 
-#### trop de décimales ?
+### trop de décimales ?
 Le nombre de décimales des sorties ne vous convient pas ? Il est alors possible de spécifier le nombre de chiffres à afficher grâce au paramètre digits. Par exemple, si je voulais obtenir 2 chiffres après la virgule lors de mon _summary()_ sur le jeu de données *rp2012*, j'eus écris  `summary(rp2012, digits = 2)`. 
 
 S'il vous plaît, faites en sorte d'appliquer la fonction `summary()` sur le jeu de données **hdv2003** mais en limitant le nombre de décimales à 3 chiffres après la virgule.
-```{r decimales, exercise=TRUE, exercise.eval=FALSE}
+```{r decimales, exercise=TRUE, exercise.startover = TRUE, exercise.eval=FALSE}
 
 ```
 ```{r decimales-hint-1}
@@ -247,16 +288,16 @@ summary(hdv2003, digits = 3)
 La fonction summary() produit un résumé statistique de toutes vos variables. Il est cependant possible de cibler une variable d’intérêt dans votre analyse. Pour cibler une variable de la sorte, il suffit de taper summary(Nom_de_la_table$Nom_de_la_variable).
 
 Selon le même principe, produisez les principales statistiques de la variable **âge**.
-```{r exo3, exercise=TRUE}
+```{r exo3, exercise=TRUE,exercise.startover = TRUE}
 
 ```
 
 ```{r exo3-solution}
 summary(hdv2003$age)
 ```
-#### un petit quizz
+### Un ^~petit~^ quizz
 ```{r quizzexo3, echo=FALSE}
-quiz(caption = "Summary et l'allure de la distribution",
+quiz(caption = "Summary a-t-il de l'allure ?",
   question(text = "A partir des résultats de la fonction summary(), pouvez-vous dire quelque chose sur l’allure générale de la distribution de cette variable ? (plusieurs réponses possibles)",
     answer(text = "Non, et je ne sais pas pourquoi", message = "Pense à FC"),
     answer(text = "Oui, et je ne sais pas quoi ajouter", message = "de la réflexion ?" ),
@@ -284,7 +325,7 @@ Nous allons afficher les principales statistiques descriptives de votre jeu de d
 Il ne reste plus qu'à appliquer la fonction `skim()` au jeu de données **hdv2003**. 
 C'est ton moment... mais je te conseille de mettre ta fenêtre en plein écran si ce n'est pas déjà le cas. Skim, c'est un spectacle.
 
-```{r exo4, exercise=TRUE, exercise.eval=FALSE}
+```{r exo4, exercise=TRUE, exercise.startover = TRUE, exercise.eval=FALSE}
 
 ```
 ```{r exo4-hint-1}
@@ -338,7 +379,7 @@ Quelles différences observez-vous entre les 2 sorties ? Prenez quelques instant
 
 ### Exercice 5 
 
-```{r exo5, exercise = TRUE, exercise.eval = FALSE}
+```{r exo5, exercise = TRUE,exercise.startover = TRUE,  exercise.eval = FALSE}
 
 ```
 
@@ -357,7 +398,7 @@ on peut remplacer la syntaxe table_mère$colonne_choisie1 par table_mère, colon
 ### Exercice 5 bis
 Réalisez une analyse descriptive de la variable age de la table hdv2003
 
-```{r exo5bis, exercise = TRUE, exercise.eval = FALSE}
+```{r exo5bis, exercise = TRUE,exercise.startover = TRUE, exercise.eval = FALSE}
 
 ```
 ```{r exo5bis-solution}
@@ -402,7 +443,7 @@ QQ-plot de la variable âge pour attester de la normalité de sa distribution (b
 
 Enlever l’histogramme de la sortie skim
 
-```{r exercice7, exercise=TRUE, exercise.eval=FALSE}
+```{r exercice7, exercise=TRUE,exercise.startover = TRUE, exercise.eval=FALSE}
 
 ```
 
@@ -430,7 +471,7 @@ la fonction skim_with() permet de travailler avec ses propres statistiques, sur 
 #commentaires : on choisit pour les variables numériques d’écraser les stats fournies initialement par skim_with(append=False) et de mettre l’écart interquartile et l’écart absolu à la médiane. On stocke ce skim_with() afin de pouvoir l’utiliser comme une fonction. on  peut utiliser la manière est directe, on déclare les nouvelles stats en même temps que le skim_with() ou on peut créer la liste de stat qu’on stocke, puis on crée le skim_with().
 
 <!-- @commentaires : on ne veut que sd et median, on les liste pour les variables numériques, et on écrase (append=False)-->
-```{r exemple1, exercise = FALSE, exercise.eval=FALSE}
+```{r exemple1, exercise = FALSE, exercise.startover = TRUE, exercise.eval=FALSE}
 mon_skim <- skim_with(
   numeric = sfl("écart-type"=sd,"médiane"=median),
   append = FALSE)
@@ -440,7 +481,7 @@ mon_skim(hdv2003)
 
 <!--@on ne veut qu’une nouvelle variable “écart absolu à la médiane”, en se débarrassant des valeurs manquantes, il faut placer un tild avant la fonction et respecter la syntaxe suivante:  -->
 
-```{r exemple2, exercise=FALSE, exercise.eval=FALSE}
+```{r exemple2, exercise=FALSE,exercise.startover = TRUE, exercise.eval=FALSE}
 mon_autre_skim<-skim_with(
   numeric=sfl("écat absolu à la médiane"=~mad(.,na.rm=TRUE)),
   				append=FALSE)
@@ -450,7 +491,7 @@ mon_autre_skim(hdv2003)
 
 <!--@une autre façon de coder est de lister les fonctions qu’on va stocker et de les renseigner à l’intérieur du skim_with(). Ici, mes_skimmers contient les fonctions (mean et max) pour les var num et (est ordonné ?) pour les factors.:
 -->
-```{r exemple3, exercise=TRUE, exercise.eval=FALSE}
+```{r exemple3, exercise=TRUE,exercise.startover = TRUE, exercise.eval=FALSE}
 
 ```
 
@@ -469,7 +510,7 @@ Pour les variables de type numérique, ajoutez l’écart interquartile en prena
 
 Dans un autre skim, n’affichez que l’écart absolu à la médiane pour la variable poids.
 
-```{r exercice8-ecart, exercise=TRUE, exercise.eval = FALSE}
+```{r exercice8-ecart, exercise=TRUE, exercise.eval = FALSE, exercise.startover = TRUE}
 
 ```
 ```{r, exercice8-ecart-solution}
@@ -500,7 +541,7 @@ Pour regrouper, la fonction de dplyr est group_by(), select() pour sélectionner
 Skim fonctionne très bien avec les groupements. Réalisez un skim() de la table hdv2003 en regroupant les informations par sexe. Puis, entre la variable comptabilisant le nombre de frères et sœurs et celle comptabilisant le nombre d’heures passées devant la télévision, laquelle a la valeur moyenne la plus élevée (freres.soeurs)?La table hdv2003 comporte-t-elle des valeurs manquantes (réponse : heures.tv   mauvaises réponses : age, nivetud,hard.rock) ? 
 
 
-```{r exercice-supplementaire, exercise=TRUE, exercise.eval=FALSE}
+```{r exercice-supplementaire, exercise=TRUE, exercise.eval=FALSE, exercise.startover = TRUE}
 
 ```
 <div id="exercice-supplementaire">

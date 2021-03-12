@@ -111,10 +111,10 @@ Alors comme ça, tu veux apprendre à skimmer ? Bien, tu es au bon endroit. Dans
 Bien, Mais tu le sais, un bon statisticien passe du temps à connaître son objet. Alors nous allons commencer en douceur avec un jeu de données issu de l'enquête Histoire de vie de l'Insee. Il faut bien justifier son salaire...
 
 ### Connaissez-vous bien votre jeu de données ?
-Le jeu de données est préchargé. Il s'appelle **hdv2003**, et nous allons commencer par déterminer des éléments simples à son propos. Quelle taille fait-il ? Comment s'appellent les noms des colonnes ? De quoi sont-elles faites? ... Que des choses utiles pour la suite ! 
+Le jeu de données est préchargé. Il s'appelle **hdv2003**, et nous allons commencer par déterminer des éléments simples à son propos. Quelle taille fait-il ? Comment s'appellent les noms des colonnes ? De quoi sont-elles faites ? ... Que des choses utiles pour la suite ! 
 
 ### Prendre la dimension du problème
-Ton jeu de données est un *tableau* de données. Mais un tableau, c'est avant tout quelque chose de rectangulaire qui peut se décomposer en lignes et en colonnes. Eh bien! qu'allons nous faire maintenant ? ... Exact! Nous allons compter le nombre de lignes et le nombre de colonnes.
+Ton jeu de données est un *tableau* de données. Mais un tableau, c'est avant tout quelque chose de rectangulaire qui peut se décomposer en lignes et en colonnes. Eh bien ! qu'allons nous faire maintenant ? ... Exact ! Nous allons compter le nombre de lignes (nombre d'observations) et le nombre de colonnes (nombre de variables).
 Pour cela, nous allons utiliser la fonction **dim()** sur l'objet **hdv2003**. 
 Tu ne sais pas faire ? N'aie crainte, voici un petit exemple sur un autre jeu de données qu'il te suffira de reproduire sur le tien.
 
@@ -137,7 +137,7 @@ dim(...)
 dim(hdv2003)
 ```
 <div id="jeudedonnees">
-**Indice:** Tu peux trouver un indice puis la solution en cliquant sur l'ampoule!
+**Indice:** Tu peux trouver un indice puis la solution en cliquant sur l'ampoule !
 </div>
 ```{r jeudedonnees-code-check}
 grade_code(glue_correct = random_praiseFR())
@@ -146,7 +146,7 @@ grade_code(glue_correct = random_praiseFR())
 ### Souviens-toi le dim() dernier
 
 ```{r dim-quizz, echo=FALSE, exercise.startover = TRUE}
-question("Combien de lignes et de colonnes contient hdv2003 ? ",
+question("Combien de lignes et de colonnes contient la table hdv2003 ? ",
 answer(text = "5170 lignes et 60 colonnes", message = "Ne confonds tu pas avec le jeu de données de l'exemple ?"),
 answer(text = "60 lignes et 5170 colonnes", message = "Je crois que tu confonds avec le jeu de données de l'exemple, et en plus tu as inversé les lignes et les colonnes"),
 answer(text = "2000 lignes et 20 colonnes", correct = TRUE, message = "Bravo, le monde de la statistique descriptive s'ouvre à toi !"),
@@ -163,14 +163,14 @@ random_answer_order = TRUE
 
 
 ### Trouvons le nom des variables
-Super ! Tu as bien trouvé la forme de ton tableau de données, aussi appelé *dataframe* par nos amis outre-Manche. Sauf, que maintenant, tu aimerais en savoir plus. Ainsi, après avoir considéré ses formes, tu voudrais bien savoir comment il s'appelle. Il suffit de lui demander! Tu vas pouvoir obtenir le nom de chacune des variables très facilement. 
+Super ! Tu as bien trouvé la forme de ton tableau de données, aussi appelé *dataframe* par nos amis d'outre-Manche. Sauf que, maintenant, tu aimerais en savoir plus. Ainsi, après avoir considéré ses formes, tu voudrais bien savoir comment il s'appelle. Il suffit de lui demander ! Tu vas pouvoir obtenir le nom de chacune des variables très facilement. 
 
-Pour obtenir le nom des variables, utiliser la commande `names()` sur le jeu de données *hdv2003*:
+Pour obtenir le nom des variables, utiliser la commande `names()` sur le jeu de données *hdv2003*
 ```{r nomDesVariables, exercise = TRUE, exercise.eval=FALSE, exercise.startover = TRUE}
  
 ```
 <div id="nomDesVariables-hint-2">
-**Indice:** Il va falloir utiliser le jeu de données `hdv2003` à l'intérieur de la fonction  names()`.
+**Indice:** Il va falloir utiliser le jeu de données `hdv2003` à l'intérieur de la fonction  `names()`.
 </div>
 ```{r nomDesVariables-hint-1}
 names(...)
@@ -192,7 +192,7 @@ Enfin, pour avoir le type de variables, utiliser la fonction `str()`
 
 ```
 <div id="typeDesVariables-hint-1">
-**Indice:** Appliquer la même méthode que pour la fonction **names()** mais pour la fonction **str()**`.
+**Indice:** Appliquer la même méthode que pour la fonction **names()** avec pour la fonction **str()**
 </div>
 ```{r typeDesVariables-hint-1}
 #Utiliser
@@ -211,26 +211,24 @@ grade_code(glue_correct = random_praiseFR())
 ### Résumons un peu
 Comme vous le constatez,  `str()` est une fonction bien plus complète que `names()`.
 
-On trouve ainsi :
-- 15 variables catégorielles de type _Factor_
-- 5 variables quantitatives (3 entiers et 2 numériques)
+On trouve ainsi 15 variables catégorielles de type _Factor_ et 5 variables quantitatives (3 entiers et 2 numériques)
 
 ### Le facteur n’est pas passé ?
 
 Mais qu'est-ce que c'était déjà ce _Factor_ ?
-Les facteurs (factors an anglais) sont un type de vecteur géré nativement par R et utilisés dans de nombreux domaines (modèles statistiques, représentations graphiques,…). 
+Les facteurs (factors an anglais) sont un type de vecteur géré nativement par R et utilisés dans de nombreux domaines (modèles statistiques, représentations graphiques…). 
 
 Les facteurs prennent leurs valeurs dans un ensemble de modalités prédéfinies et ne peuvent en prendre d’autres. 
-La liste des valeurs possibles est donnée par la fonction levels.
+La liste des valeurs possibles est donnée par la fonction `levels()`.
 
-Par exemple, ici il suffit de lancer le code pour connaître les valeurs possibles de la variable _sexe_:
+Par exemple, ici il suffit de lancer le code pour connaître les valeurs possibles de la variable _sexe_
 
 
 ```{r exemple-facteur, exercise = FALSE, exercise.eval = TRUE, exercise.startover = TRUE}
 levels(hdv2003$sexe)
 ```
 
-```
+
 ```{r MonExercice-solution,  exercise.reveal_solution = FALSE}
 levels(hdv2003$sexe)
 ```

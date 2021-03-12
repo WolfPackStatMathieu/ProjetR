@@ -141,6 +141,7 @@ dim(hdv2003)
 </div>
 ```{r jeudedonnees-code-check}
 grade_code(glue_correct = random_praiseFR())
+### Souviens-toi le dim() dernier
 ```
 ### Souviens-toi le dim() dernier
 

@@ -139,10 +139,10 @@ dim(hdv2003)
 <div id="jeudedonnees">
 **Indice:** Tu peux trouver un indice puis la solution en cliquant sur l'ampoule!
 </div>
-### Souviens-toi le dim() dernier
 ```{r jeudedonnees-code-check}
 grade_code(glue_correct = random_praiseFR())
 ```
+### Souviens-toi le dim() dernier
 
 ```{r dim-quizz, echo=FALSE, exercise.startover = TRUE}
 question("Combien de lignes et de colonnes contient hdv2003 ? ",

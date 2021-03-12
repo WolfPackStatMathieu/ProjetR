@@ -39,8 +39,8 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ###### Fonctions
 random_praises <- c(
-  "Quel talent!",
-  "Trop fort!",
+  "Quel talent !",
+  "Trop fort !",
     "Bravo !",
   "Félicitation !",
   "Tu assures !",
@@ -59,7 +59,7 @@ random_praises <- c(
 
 
 random_praiseFR <- function() {
-  paste0("Correct! ", sample(random_praises, 1))
+  paste0("Correct ! ", sample(random_praises, 1))
 }
 random_encouragements <- c(
   "Allez, tu vas y arriver !",
@@ -73,9 +73,8 @@ random_encouragements <- c(
   "Essaie encore, c'est le métier qui rentre",
   "Aie confiance, tu vas réussir !",
   "Pour pouvoir contempler l'arc-en-ciel, il faut d'abord endurer la pluie. Sors ton parapluie et continue !",
-  "Brooks was here.",
   "L'échec est l'épice qui donne la saveur au succès. Continue tes efforts !",
-  "Un jour, tu te diras que l'ensai, en fait, c'était facile. Mais ce jour n'arrivera que si tu réfléchis encore un peu...",
+  "Un jour, tu te diras que l'Ensai, en fait, c'était facile. Mais ce jour n'arrivera que si tu réfléchis encore un peu...",
   "Nice try, try again ! "
 )
 
@@ -224,22 +223,21 @@ La liste des valeurs possibles est donnée par la fonction `levels()`.
 Par exemple, ici il suffit de lancer le code pour connaître les valeurs possibles de la variable _sexe_
 
 
-```{r exemple-facteur, exercise = FALSE, exercise.eval = TRUE, exercise.startover = TRUE}
+```{r exemple-facteur, exercise = TRUE, exercise.eval = TRUE, exercise.startover = TRUE}
 levels(hdv2003$sexe)
 ```
 
-
-```{r MonExercice-solution,  exercise.reveal_solution = FALSE}
-levels(hdv2003$sexe)
-```
-```{r MonExercice-code-check}
-grade_code(glue_correct = random_praiseFR())
-```
-
+ <!-- ```{r MonExercice-solution,  exercise.reveal_solution = FALSE} -->
+ <!-- levels(hdv2003$sexe) -->
+ <!-- ``` -->
+ <!-- ```{r MonExercice-code-check} -->
+ <!-- grade_code(glue_correct = random_praiseFR()) -->
+ <!-- ``` -->
 
 
 
-### Exercice 2. Montre-moi tes statistiques et je te dirai qui tu es !
+
+### Montre-moi tes statistiques et je te dirai qui tu es !
 Maintenant que vous connaissez la structure de votre base de données, allons un peu plus loin dans sa description statistique.
 
 #### Allons plus loin...
@@ -263,11 +261,11 @@ grade_code(glue_correct = random_praiseFR())
 ```
 
 ### Explications:
-En effet, pour obtenir des statistiques élémentaires à partir des fonctionnalités de Rbase, on utilise la fonction summary().
-La fonction summary() offre une information statistique exhaustive sur l’ensemble des variables de la table.
+En effet, pour obtenir des statistiques élémentaires à partir des fonctionnalités de Rbase, on utilise la fonction `summary()`.
+La fonction `summary()` offre une information statistique exhaustive sur l’ensemble des variables de la table.
 
 ### trop de décimales ?
-Le nombre de décimales des sorties ne vous convient pas ? Il est alors possible de spécifier le nombre de chiffres à afficher grâce au paramètre digits. Par exemple, si je voulais obtenir 2 chiffres après la virgule lors de mon _summary()_ sur le jeu de données *rp2012*, j'eus écris  `summary(rp2012, digits = 2)`. 
+Le nombre de décimales des sorties ne vous convient pas ? Il est alors possible de spécifier le nombre de chiffres à afficher grâce au paramètre *digits*. Par exemple, si je voulais obtenir 2 chiffres après la virgule lors de mon _summary()_ sur le jeu de données *rp2012*, j'eus écris  `summary(rp2012, digits = 2)`. 
 
 S'il vous plaît, faites en sorte d'appliquer la fonction `summary()` sur le jeu de données **hdv2003** mais en limitant le nombre de décimales à 3 chiffres après la virgule.
 ```{r decimales, exercise=TRUE, exercise.startover = TRUE, exercise.eval=FALSE}
@@ -283,10 +281,10 @@ summary(hdv2003, digits = 3)
 ```
 
 
-### Exercice 3 Focus sur une ou plusieurs variables d’intérêt
-La fonction summary() produit un résumé statistique de toutes vos variables. Il est cependant possible de cibler une variable d’intérêt dans votre analyse. Pour cibler une variable de la sorte, il suffit de taper summary(Nom_de_la_table$Nom_de_la_variable).
+###Focus sur une ou plusieurs variables d’intérêt
+La fonction `summary()` produit un résumé statistique de toutes vos variables. Il est cependant possible de cibler une variable d’intérêt dans votre analyse. Pour cela, il suffit de taper `summary(Nom_de_la_table$Nom_de_la_variable)`.
 
-Selon le même principe, produisez les principales statistiques de la variable **âge**.
+Selon le même principe, produisez les principales statistiques de la variable **age**.
 ```{r exo3, exercise=TRUE,exercise.startover = TRUE}
 
 ```
@@ -294,12 +292,12 @@ Selon le même principe, produisez les principales statistiques de la variable *
 ```{r exo3-solution}
 summary(hdv2003$age)
 ```
-### Un ^~petit~^ quizz
+### Un petit quizz
 ```{r quizzexo3, echo=FALSE}
 quiz(caption = "Summary a-t-il de l'allure ?",
   question(text = "A partir des résultats de la fonction summary(), pouvez-vous dire quelque chose sur l’allure générale de la distribution de cette variable ? (plusieurs réponses possibles)",
-    answer(text = "Non, et je ne sais pas pourquoi", message = "Pense à FC"),
-    answer(text = "Oui, et je ne sais pas quoi ajouter", message = "de la réflexion ?" ),
+    answer(text = "Non, et je ne sais pas pourquoi", message = "Vérifie tes cours de statistique descriptive !"),
+    answer(text = "Oui, et je ne sais pas quoi ajouter", message = "Cherche un peu plus" ),
     answer(text= "Non, on ne peut rien dire sur l’allure générale de la distribution", correct = TRUE),
     answer(text = "La médiane est très proche de la moyenne (signe d’une faible dispersion)", correct = TRUE),
     allow_retry = TRUE,
@@ -315,11 +313,12 @@ quiz(caption = "Summary a-t-il de l'allure ?",
 <!--Début de la partie SKIM : présentation de skim rapide avant exo 4 puis exhaustive après l’exo 4-->
 
 ## Skimmons un peu
-### Skim c'est quoi ?
+### Apprenons à skimmer tout seul !
 L’extension **SkimR** permet de fournir un résumé statistique respectant le principe de moindre surprise, afin d’éviter à l’utilisateur toute (mauvaise) surprise.
-La fonction  `skim()`, très similaire à la fonction `summary()`, fonctionne avec des _data frames_ et affiche des résultats pour chaque colonne( Le tableau de données doit être structuré selon le format tidy, autrement dit les variables sont en colonnes, chaque variable ne correspond qu’à une seule colonne, les observations sont en lignes. L’intersection d’une ligne et d’une colonne est alors une valeur mesurée.),les statistiques présentées dépendent du typage de la variable.
+La fonction  `skim()`, très similaire à la fonction `summary()`, fonctionne avec des _data frames_ et affiche des résultats pour chaque colonne,les statistiques présentées dépendent du typage de la variable.
+Le tableau de données doit être structuré selon le format *tidy*, autrement dit les variables sont en colonnes, chaque variable ne correspond qu’à une seule colonne, les observations sont en lignes. L’intersection d’une ligne et d’une colonne est alors une valeur mesurée.
 
-### Exercice 4 Laissez moi skimmer.
+### Laissez-moi skimmer, laissez-moi...
 Nous allons afficher les principales statistiques descriptives de votre jeu de données complet, en recourant cette fois-ci au package **skimR** et à sa fonction `skim()`. Pour cela, rien de plus simple. Nous avons déjà installé et chargé le package skimR pour vous, public. 
 Il ne reste plus qu'à appliquer la fonction `skim()` au jeu de données **hdv2003**. 
 C'est ton moment... mais je te conseille de mettre ta fenêtre en plein écran si ce n'est pas déjà le cas. Skim, c'est un spectacle.
@@ -346,7 +345,7 @@ On retrouve pour les variables **numériques** :
 * **Complete_rate** : le taux de valeurs non-manquantes  
 * **N** : le nombre total de valeurs  
 * **Mean** : la moyenne arithmétiques des valeurs  
-* **Sd** : l’écat-type des valeurs  
+* **Sd** : l’écat type des valeurs  
 * **Min** : le minimum des valeurs  
 * **P25** : le 1er quartile des valeurs   
 * **Median** : la médiane des valeurs  
@@ -360,7 +359,7 @@ On retrouve pour les variables **catégorielles** :
 * **missing**: le nombre total de valeurs manquantes  
 * **complete_rate**: le taux de valeurs non-manquantes  
 * **n_unique**: le nombre de modalités de la variable observée  
-* **top_count**: le nombre de lignes pour chaqu modalités et le nombre total de données manquantes  
+* **top_count**: le nombre de lignes pour chaque modalité et le nombre total de données manquantes  
 * **ordered**: si la variable est ordonnée, TRUE est affiché, FALSE sinon.  
     
 
@@ -462,7 +461,7 @@ skim_without_charts(hdv2003)
 # Skim_with() est une fonction qui produit une fonction, skim_with() est clôturée au sens mathématique ; il est donc possible d’en créer plusieurs dans une même session R. Néanmoins, il faut assigner la sortie de skim_with() avant de ne pouvoir l'utiliser. 
 ```
 
-## Apprenez à skimmer tout seul!
+## Under the skim
 ### Skim tout seul
 la fonction skim_with() permet de travailler avec ses propres statistiques, sur les variables numériques par exemple :
 

@@ -363,17 +363,20 @@ On retrouve pour les variables **catégorielles** :
 * **ordered**: si la variable est ordonnée, TRUE est affiché, FALSE sinon.  
     
 
-#### *Ce que les autres font, nous avons toujours l'impression que nous pourrions le faire mieux.* Cioran
+   
+#### *"Ce que les autres font, nous avons toujours l'impression que nous pourrions le faire mieux."* Emil Cioran
+  
 
-L’avantage de `skim()` par rapport à `summary()` est la pertinence des paramètres de dispersion et de position, qui sont les plus usuels pour un statisticien. Chaque type de données est présenté séparément. SkimR peut gérer les valeurs booléennes, les dates et bien d’autres types ( numérique, caractère, factor, booléen, complexes, dates, POSIXct (date avec temps, par exemple 2021-02-26 23:45 GMT), ts (des séries temporelles)et supporte les spark-bar et les spark-line (Graphiques dans les cellules du data frame, qui ne doivent donc pas être considérés comme des valeurs)
+L’avantage de `skim()` par rapport à `summary()` est la pertinence des paramètres de dispersion et de position, qui sont les plus usuels pour un statisticien. Chaque type de données est présenté séparément. SkimR peut gérer les valeurs booléennes, les dates et bien d’autres types comme le type numérique, caractère, factor, booléen, complexes, dates, POSIXct TODO FOOTNOTE(date avec temps, par exemple 2021-02-26 23:45 GMT), ts (des séries temporelles) et supporte les spark-bar et les spark-line (graphiques dans les cellules du data frame, qui ne doivent donc pas être considérés comme des valeurs)
 .  De plus, l’histogramme permet de rapidement regarder si la distribution de la variable choisie s’éloigne d’une distribution normale, souvent plus parlant qu’une p-value.
 
-SkimR retourne un objet skim_df ( I.e. skim data frame). Ce dernier peut notamment être utilisé dans un pipeline tidyverse, contrairement au retour de summary() qui est une table. Si le format large ne convient pas, on peut également utiliser to_long(nom_du_data_frame, les colonnes à skimer, les fonctions de skim skim_fun=skim) qui retourne un data frame comprenant 4 colonnes : variable, type, stat et formatted.
+SkimR retourne un objet skim_df (i.e. skim data frame). Ce dernier peut notamment être utilisé dans un pipeline *tidyverse*, contrairement au retour de `summary()` qui est une table. Si le format large ne convient pas, on peut également utiliser `to_long(nom_du_data_frame, les colonnes à skimer, les fonctions de skim skim_fun=skim)` qui retourne un data frame comprenant 4 colonnes : variable, type, stat et formatted.
+
 
 
 
 <!--Rappel des différences entre skim et summary-->
-Quelles différences observez-vous entre les 2 sorties ? Prenez quelques instants pour réfléchir puis comparez votre réflexion avec les informations suivantes : 
+Quelles différences observez-vous entre les 2 sorties ? Prenez quelques instants pour réfléchir puis comparez votre réflexion avec les informations suivantes : TODO remettre les sorties précédentes
 
 ### Exercice 5 
 

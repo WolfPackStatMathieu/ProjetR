@@ -106,8 +106,8 @@ random_encouragementFR <- function() {
 # Rbase vs SkimR `r params$d`
 
 ## Statistique descriptive avec RBase {data-progressive=TRUE}
-Alors comme ça, tu veux apprendre à skimmer ? Bien, tu es au bon endroit. Dans pas longtemps, tu pourras toi aussi narguer tes camarades qui utilisent *encore* des commandes de **Rbase**. 
-Bien, Mais tu le sais, un bon statisticien passe du temps à connaître son objet. Alors nous allons commencer en douceur avec un jeu de données issu de l'enquête Histoire de vie de l'Insee. Il faut bien justifier son salaire...
+Alors comme ça, tu veux apprendre à skimmer ? Bien, tu es au bon endroit. Dans peu de temps, tu pourras toi aussi narguer tes camarades qui utilisent *encore* des commandes de **Rbase**. 
+Bien, mais, tu le sais, un bon statisticien passe du temps à connaître son objet. Alors nous allons commencer en douceur avec un jeu de données issu de l'enquête Histoire de vie de l'Insee. Il faut bien justifier son salaire...
 
 ### Connaissez-vous bien votre jeu de données ?
 Le jeu de données est préchargé. Il s'appelle **hdv2003**, et nous allons commencer par déterminer des éléments simples à son propos. Quelle taille fait-il ? Comment s'appellent les noms des colonnes ? De quoi sont-elles faites ? ... Que des choses utiles pour la suite ! 
@@ -238,17 +238,20 @@ levels(hdv2003$sexe)
 
 
 ### Montre-moi tes statistiques et je te dirai qui tu es !
+
 Maintenant que vous connaissez la structure de votre base de données, allons un peu plus loin dans sa description statistique.
 
 #### Allons plus loin...
 
 A l’aide d’une commande dédiée issue de Rbase (autrement dit, sans recourir à l’utilisation d’un package annexe), essayez de produire les principales statistiques descriptives du jeu de données hdv2003.
+
 <div id="allonsplusloin">
 **Indice:** Si je traduisais le nom de la fonction en français, j'obtiendrais _résumé_. 
 </div>
-```{r qui-tu-es, exercise=TRUE, exercise.eval=FALSE, exercise.startover = TRUE}
 
+```{r qui-tu-es, exercise=TRUE, exercise.eval=FALSE, exercise.startover = TRUE}
 ```
+
 ```{r qui-tu-es-hint-1}
 summary(...)
 ```
@@ -261,6 +264,7 @@ grade_code(glue_correct = random_praiseFR())
 ```
 
 ### Explications:
+
 En effet, pour obtenir des statistiques élémentaires à partir des fonctionnalités de Rbase, on utilise la fonction `summary()`.
 La fonction `summary()` offre une information statistique exhaustive sur l’ensemble des variables de la table.
 
@@ -315,7 +319,7 @@ quiz(caption = "Summary a-t-il de l'allure ?",
 ## Skimmons un peu
 ### Apprenons à skimmer tout seul !
 L’extension **SkimR** permet de fournir un résumé statistique respectant le principe de moindre surprise, afin d’éviter à l’utilisateur toute (mauvaise) surprise.
-La fonction  `skim()`, très similaire à la fonction `summary()`, fonctionne avec des _data frames_ et affiche des résultats pour chaque colonne,les statistiques présentées dépendent du typage de la variable.
+La fonction  `skim()`, très similaire à la fonction `summary()`, fonctionne avec des _data frames_ et affiche des résultats pour chaque colonne, les statistiques présentées dépendent du typage de la variable.
 Le tableau de données doit être structuré selon le format *tidy*, autrement dit les variables sont en colonnes, chaque variable ne correspond qu’à une seule colonne, les observations sont en lignes. L’intersection d’une ligne et d’une colonne est alors une valeur mesurée.
 
 ### Laissez-moi skimmer, laissez-moi...
@@ -378,25 +382,19 @@ SkimR retourne un objet skim_df (i.e. skim data frame). Ce dernier peut notammen
 <!--Rappel des différences entre skim et summary-->
 Quelles différences observez-vous entre les 2 sorties ? Prenez quelques instants pour réfléchir puis comparez votre réflexion avec les informations suivantes : TODO remettre les sorties précédentes
 
-### Exercice 5 
 
-```{r exo5, exercise = TRUE,exercise.startover = TRUE,  exercise.eval = FALSE}
+- Si les deux fonctions indiquent le nombre de valeurs manquantes (NA), skim indique également son complémentaire (en structure), à savoir le taux de valeurs non manquantes
+- Skim apporte une indication sur la dispersion grâce à l’écart-type
+- En sortie, les variables sont regroupées par type (pas de panique si vous ne retrouvez pas l’ordre initial des variables de votre jeu de données!)
+- Pour les variables numériques, un histogramme permet de visualiser sa distribution
 
-```
 
-
-```{r exo5-solution}
-# - Si les deux fonctions indiquent le nombre de valeurs manquantes (NA), skim indique également son complémentaire (en structure), à savoir le taux de valeurs non manquantes
-# - Skim apporte une indication sur la dispersion grâce à l’écart-type
-# - En sortie, les variables sont regroupées par type (pas de panique si vous ne retrouvez pas l’ordre initial des variables de votre jeu de données!)
-# - Pour les variables numériques, un histogramme permet de visualiser sa distribution
-
-```
 
 Skimr étant compatible avec le tidyverse, d’autres syntaxes peuvent être utilisées. Par exemple, pour sélectionner des variables d’une table, on peut les lister après avoir nommé la table mère :
-on peut remplacer la syntaxe table_mère$colonne_choisie1 par table_mère, colonnechoisie1. 
+on peut remplacer la syntaxe `table_mère$colonne_choisie1` par `table_mère, colonne_choisie1`. 
 
-### Exercice 5 bis
+### Skim age
+
 Réalisez une analyse descriptive de la variable age de la table hdv2003
 
 ```{r exo5bis, exercise = TRUE,exercise.startover = TRUE, exercise.eval = FALSE}
@@ -411,19 +409,20 @@ skim(hdv2003,age) #utilisation de la syntaxe tidyselect
 
 ```
 
-#### suite
-SkimR peut sembler rigide au premier abord. Cependant, il est possible de personnaliser les sorties et, surtout, de préciser les statistiques qui nous intéressent le plus. Nous pouvons donc remplacer, supprimer ou ajouter nos propres statistiques dans le but de simplifier encore plus son utilisation. Pour cela, il faut créer une liste de fonctions skim sfl() associée à un typage particulier de données puis les implémenter grâce à la fonction skim_with(). Pour revenir à tout moment à la configuration de base de skim_with(), il est possible de restaurer les paramètres par défaut grâce à la fonction skim_with_defaults(). 
+#### Adapte ton skim !
+
+SkimR peut sembler rigide au premier abord. Cependant, il est possible de personnaliser les sorties et, surtout, de préciser les statistiques qui nous intéressent le plus. Nous pouvons donc remplacer, supprimer ou ajouter nos propres statistiques dans le but de simplifier encore plus son utilisation. Pour cela, il faut créer une liste de fonctions skim `sfl()` associée à un typage particulier de données puis les implémenter grâce à la fonction `skim_with()`. Pour revenir à tout moment à la configuration de base de `skim_with()`, il est possible de restaurer les paramètres par défaut grâce à la fonction `skim_with_defaults()`. 
 
 <!--encore un rappel de la différence entre summary et skim-->
 
-### Exercice 6 Une fonction qui a de l'allure
+### Exercice 6 Une fonction qui a de l'allure Jeu de mot à trouver
 
-Désormais, à l’aide des sorties de la fonction skim(), que pouvez-vous dire à nouveau sur la distribution de la variable âge et que ne le permettait pas la fonction summary ?
+Désormais, à l’aide des sorties de la fonction `skim()`, que pouvez-vous dire à nouveau sur la distribution de la variable âge et que ne le permettait pas la fonction summary ?
 
 
 <!-- FAIRE UN QUIZZ ICI-->
 
--Skim fournit un histogramme de la distribution de chaque variable numérique, intégrée à la table des résultats. Cela permet de dire que la distribution de la variable âge est d’allure gaussienne, chose que l’on ne pouvait conclure à travers la fonction summary.
+- Skim fournit un histogramme de la distribution de chaque variable numérique, intégrée à la table des résultats. Cela permet de dire que la distribution de la variable âge est d’allure gaussienne, chose que l’on ne pouvait conclure à travers la fonction summary.
 - il n’y a aucune différence. 
 - La seule différence est le format.
 
@@ -437,10 +436,11 @@ ggqqplot(hdv2003$age)
 
 -->
 #### QQ-plot
+
 QQ-plot de la variable âge pour attester de la normalité de sa distribution (bien que les queues de distribution, à gauche notamment, s’écartent légèrement de la distribution normale théorique).
 
 <!-- début d’utilisation de skim_with, mise en pratique simpliste du texte précédent l’exo 6 -->
-### Exercice 7 Enlever l'histogramme de la sortie skim (déshabillez-moi!)
+### Exercice 7 Enlever l'histogramme de la sortie skim (déshabillez-moi!) Déshabiller skim ! 
 
 Enlever l’histogramme de la sortie skim
 

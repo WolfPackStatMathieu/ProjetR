@@ -28,6 +28,8 @@ install.packages("questionr", repos = "https://cloud.r-project.org/")
 library(questionr)
 install.packages("tidyverse", repos = "https://cloud.r-project.org/")
 library(tidyverse)
+install.packages("ggpubr", repos = "https://cloud.r-project.org/")
+library(ggpubr)
 data(list="hdv2003")
 data(list="rp2012")
 ########## Option des exercices #######
@@ -80,7 +82,7 @@ random_encouragements <- c(
 
 
 random_encouragementFR <- function() {
-  paste0("Correct! ", sample(random_encouragements, 1))
+  paste0(sample(random_encouragements, 1))
 }
 
 ```
@@ -383,7 +385,7 @@ SkimR retourne un objet skim_df (i.e. skim data frame). Ce dernier peut notammen
 
 <!--Rappel des différences entre skim et summary-->
 Quelles différences observez-vous entre les 2 sorties ? Prenez quelques instants pour réfléchir puis comparez votre réflexion avec les informations suivantes : voici la sortie `summary(hdv2003)` à comparer avec la sortie `skim(hdv2003)` affichée précédemment. 
-```{r affichagesummary, exercise=FALSE,echo=TRUE}
+```{r affichagesummary,  exercise=FALSE,exercise.startover = TRUE,echo=TRUE}
 summary(hdv2003)
 ```
 
@@ -422,18 +424,18 @@ SkimR peut sembler rigide au premier abord. Cependant, il est possible de person
 
 ### Une fonction qui a de l'allure
 
-Désormais, à l’aide des sorties de la fonction `skim()`, que pouvez-vous dire à nouveau sur la distribution de la variable âge et que ne le permettait pas la fonction summary ?
+Désormais, à l’aide des sorties de la fonction `skim()`, que pouvez-vous dire à nouveau sur la distribution de la variable `age` et que ne le permettait pas la fonction `summary()` ?
 
 
 
 ```{r quizzexo6, echo=FALSE}
 quiz(caption = "Une distribution normale ?",
   question(text = "Que nous dit Skim que Summary nous a spolié ?",
-    answer(text = "il n’y a aucune différence", message = random_encouragementFR),
-    answer(text = "Oui, et je ne sais pas quoi ajouter", message = random_encouragementFR),
+    answer(text = "il n’y a aucune différence", message = random_encouragementFR()),
+    answer(text = "Oui, et je ne sais pas quoi ajouter", message = random_encouragementFR()),
     answer(text= "Skim fournit un histogramme de la distribution de chaque variable numérique, intégrée à la table des résultats. Cela permet de dire que la distribution de la variable âge est d’allure gaussienne, chose que l’on ne pouvait conclure à travers la fonction summary.", correct = TRUE),
-    answer(text = "La seule différence est le format.", message = random_encouragementFR),
-    answer(text="La variable âge est à la fois qualitative et quantitative, ce qui nous pose un problème",message = random_encouragementFR),
+    answer(text = "La seule différence est le format.", message = random_encouragementFR()),
+    answer(text="La variable âge est à la fois qualitative et quantitative, ce qui nous pose un problème",message = random_encouragementFR()),
     allow_retry = TRUE,
     random_answer_order = TRUE,
     post_message = random_praiseFR()
@@ -448,14 +450,11 @@ quiz(caption = "Une distribution normale ?",
 
 `skim()` permet de visualiser l’allure de la distribution des variables, et en particulier de la variable `age`. Donc, on peut déduire des histogrammes de sortie que la variable âge est globalement distribuée selon une loi normale.
 
-Voici le code pour vérifier la normalité d’une variable à travers un qq-plot:
-
-library("ggpubr")
+Voici le code pour vérifier la normalité d’une variable à travers un qq-plot :
+```{r exemple_qqplot, exercise=FALSE,exercise.startover = TRUE,echo=TRUE}
 # QQ plot
 ggqqplot(hdv2003$age)
-
--->
-#### QQ-plot
+```
 
 QQ-plot de la variable âge pour attester de la normalité de sa distribution (bien que les queues de distribution, à gauche notamment, s’écartent légèrement de la distribution normale théorique).
 

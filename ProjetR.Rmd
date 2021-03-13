@@ -418,7 +418,7 @@ skim(hdv2003,age) #utilisation de la syntaxe tidyselect
 
 #### Adapte ton skim !
 
-SkimR peut sembler rigide au premier abord. Cependant, il est possible de personnaliser les sorties et, surtout, de préciser les statistiques qui nous intéressent le plus. Nous pouvons donc remplacer, supprimer ou ajouter nos propres statistiques dans le but de simplifier encore plus son utilisation. Pour cela, il faut créer une liste de fonctions skim `sfl()` associée à un typage particulier de données puis les implémenter grâce à la fonction `skim_with()`. Pour revenir à tout moment à la configuration de base de `skim_with()`, il est possible de restaurer les paramètres par défaut grâce à la fonction `skim_with_defaults()`. 
+SkimR peut sembler rigide au premier abord. Cependant, il est possible de personnaliser les sorties et, surtout, de préciser les statistiques qui nous intéressent le plus. Nous pouvons donc remplacer, supprimer ou ajouter nos propres statistiques dans le but de simplifier encore plus son utilisation. Pour cela, il faut créer une liste de fonctions skim `sfl()` associée à un typage particulier de données (numeric, factor ou character) puis les implémenter grâce à la fonction `skim_with()`. Pour revenir à tout moment à la configuration de base de `skim_with()`, il est possible de restaurer les paramètres par défaut grâce à la fonction `skim_with_defaults()`. 
 
 <!--encore un rappel de la différence entre summary et skim-->
 
@@ -456,41 +456,52 @@ Voici le code pour vérifier la normalité d’une variable à travers un qq-plo
 ggqqplot(hdv2003$age)
 ```
 
-QQ-plot de la variable âge pour attester de la normalité de sa distribution (bien que les queues de distribution, à gauche notamment, s’écartent légèrement de la distribution normale théorique).
+Bien que les queues de distribution, à gauche notamment, s’écartent légèrement de la distribution normale théorique, le qq-plot de la variable âge permet de confirmer la normalité de sa distribution.
 
 <!-- début d’utilisation de skim_with, mise en pratique simpliste du texte précédent l’exo 6 -->
-### Exercice 7 Enlever l'histogramme de la sortie skim (déshabillez-moi!) Déshabiller skim ! 
+### Déshabiller skim ! 
 
-Enlever l’histogramme de la sortie skim
+On souhaite désormais retirer l'histogramme en sortie. Pour cela, il est possible d'utiliser la fonction `skim_without_charts()`. Appliquer cette fonction au jeu de données `hdv2003` 
 
-```{r exercice7, exercise=TRUE,exercise.startover = TRUE, exercise.eval=FALSE}
+```{r exo_chart, exercise=TRUE,exercise.startover = TRUE, exercise.eval=FALSE}
 
+```
+```{r exo_chart-solution}
+skim_without_charts(hdv2003)
+```
+### Déshabiller skim différemment ! 
+
+Pour enlever l’histogramme, il existe une alternative : 
+Utiliser la fonction `skim_with()` qui permet d’implémenter une liste de statistiques à retourner ou non. Ici, dans la liste, on dit que l’on ne veut pas voir le graphe. D’une manière générale, si on souhaite se débarrasser d’un skimmer i.e. une statistique produite par `skim()`, on la fixe `= NULL`. On peut avoir les noms des skimmer de base avec `get_skimmer_names()`
+`skim_with()` est une fonction qui produit une fonction, elle est clôturée au sens mathématique ; il est donc possible d’en créer plusieurs dans une même session R. Néanmoins, il faut assigner la sortie de skim_with() avant de ne pouvoir l'utiliser.
+
+Dans l'exercice suivant, en utilisant `skim_with()`, enlever l'histogramme `hist` de la sortie produite
+
+```{r exercice7,exercise=TRUE,exercise.eval=FALSE,exercise.startover = TRUE}
+sans_hist<- ...(numeric = sfl(... = ...))
+sans_hist(...)
 ```
 
 ```{r exercice7-solution}
-# Pour enlever l’histogramme, voici les différentes possibilités: 
-# commentaires ici, est utilisé la technique skim_with qui permet d’implémenter une liste de stat à retourner ou non. Ici dans la liste on dit que l’on ne veut pas voir le graphe. D’une manière générale, si on souhaite se débarrasser d’un skimmer i.e. un statistique produite par skim, on la fixe = NULL. on peut avoir les noms des skimmer de base avec get_skimmer_names()
 sans_hist<- skim_with(numeric = sfl(hist = NULL))
 sans_hist(hdv2003)
-
-# Ou plus simplement :
-#commentaire : ici on utilise la fonction déjà implémentée qui retire le graph
-skim_without_charts(hdv2003)
-
 ```
 
 ```{r exercice7-hint-1}
-# Skim_with() est une fonction qui produit une fonction, skim_with() est clôturée au sens mathématique ; il est donc possible d’en créer plusieurs dans une même session R. Néanmoins, il faut assigner la sortie de skim_with() avant de ne pouvoir l'utiliser. 
+sans_hist<- ...(numeric = sfl(hist = ...))
+sans_hist(hdv2003) 
 ```
 
 ## Under the skim
+
 ### Skim tout seul
+
 la fonction skim_with() permet de travailler avec ses propres statistiques, sur les variables numériques par exemple :
 
-### Exemple 
-#commentaires : on choisit pour les variables numériques d’écraser les stats fournies initialement par skim_with(append=False) et de mettre l’écart interquartile et l’écart absolu à la médiane. On stocke ce skim_with() afin de pouvoir l’utiliser comme une fonction. on  peut utiliser la manière est directe, on déclare les nouvelles stats en même temps que le skim_with() ou on peut créer la liste de stat qu’on stocke, puis on crée le skim_with().
+On choisit pour les variables numériques d’écraser les stats fournies initialement par `skim_with(append=False)` et de mettre l’écart interquartile et l’écart absolu à la médiane. On stocke ce `skim_with()` afin de pouvoir l’utiliser comme une fonction. On  peut utiliser la manière directe, on déclare les nouvelles stats en même temps que le `skim_with()` ou on peut créer la liste de statistiques qu’on stocke, puis on crée le `skim_with()`.
 
-<!-- @commentaires : on ne veut que sd et median, on les liste pour les variables numériques, et on écrase (append=False)-->
+Ici, on ne garde que sd et median, on les liste pour les variables numériques, et on écrase (append=False) 
+
 ```{r exemple1, exercise = FALSE, exercise.startover = TRUE, exercise.eval=FALSE}
 mon_skim <- skim_with(
   numeric = sfl("écart-type"=sd,"médiane"=median),

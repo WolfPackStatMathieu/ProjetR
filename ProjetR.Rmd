@@ -649,20 +649,20 @@ hdv2003 %>%
 
 ### Suite
 
-Toujours sur la table `hdv2003`, entre la variable comptabilisant le nombre de frères et sœurs et celle comptabilisant le nombre d’heures passées devant la télévision, laquelle a la valeur moyenne la plus élevée (freres.soeurs)?
+Toujours sur la table `hdv2003`, entre la variable comptabilisant le nombre de frères et sœurs et celle comptabilisant le nombre d’heures passées devant la télévision, laquelle a la valeur moyenne la plus élevée ?
 
 ```{r exoh2, exercise=TRUE, exercise.eval=FALSE, exercise.startover = TRUE}
 hdv2003
  
   skim()
 ```
-```{r exoh2-hint-1, exercise=TRUE, exercise.eval=FALSE, exercise.startover = TRUE}
+```{r exoh2-hint-1}
 hdv2003...
   ...::...(...,...) ...
   skim()
 ```
 
-```{r exoh2-hint-2, exercise=TRUE, exercise.eval=FALSE, exercise.startover = TRUE}
+```{r exoh2-hint-2}
 hdv2003...
   dplyr::...(freres.soeurs,heures.tv) ...
   skim()
@@ -676,26 +676,26 @@ hdv2003%>%
 ```
 ### Un dernier pour la route
 
-La table hdv2003 comporte-t-elle des valeurs manquantes (réponse : heures.tv   mauvaises réponses : age, nivetud,hard.rock) ? 
-```{r exoh3,exercise=TRUE,exercise.eval=FALSE, exercise.startover = TRUE}
+La table hdv2003 comporte-t-elle des valeurs manquantes ? 
+```{r exoh3,exercise=TRUE,exercise.eval=FALSE, exercise.startover = TRUE, exercise.reveal_solution =FALSE}
 
 ```
-```{r exoh3-solution , exercise.reveal_solution =FALSE}
+```{r exoh3-solution}
 # On charge hdv2003, puis on le skimme et on filtre le skim_df pour n’avoir que les variables ayant des valeurs manquantes
 hdv2003 %>%
   skim() %>%
   dplyr::filter(n_missing > 0)
-
-
 ```
 
-```{r quizzexo3, echo=FALSE}
+```{r quizzexoh3, echo=FALSE}
 quiz(caption = "Manquantes, vous avez dit manquantes ?",
   question(text = " Y a-t-il des variables de la table hdv2003 ayant des valeurs manquantes ?",
-    answer(text = "Non, et je ne sais pas pourquoi", message = "Vérifie tes cours de statistique descriptive !"),
+    answer(text = "Non, et je ne sais pas pourquoi", message = "FAUX !"),
     answer(text = "Oui, et je ne sais pas quoi ajouter", message = "Cherche un peu plus" ),
-    answer(text= "Non, on ne peut rien dire sur l’allure générale de la distribution", correct = TRUE),
-    answer(text = "La médiane est très proche de la moyenne (signe d’une faible dispersion)", correct = TRUE),
+    answer(text= "heures.tv", correct = TRUE),
+    answer(text = "age", message = "Presque !"),
+    answer(text = "nivetud", message = "Presque !"),
+    answer(text = "hard.rock", message = "Presque !"),
     allow_retry = TRUE,
     random_answer_order = TRUE,
     post_message = random_praiseFR()

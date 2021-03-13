@@ -246,10 +246,11 @@ Maintenant que vous connaissez la structure de votre base de données, allons un
 A l’aide d’une commande dédiée issue de Rbase (autrement dit, sans recourir à l’utilisation d’un package annexe), essayez de produire les principales statistiques descriptives du jeu de données hdv2003.
 
 <div id="allonsplusloin">
-**Indice:** Si je traduisais le nom de la fonction en français, j'obtiendrais _résumé_. 
+**Indice :** Si je traduisais le nom de la fonction en français, j'obtiendrais _résumé_. 
 </div>
 
 ```{r qui-tu-es, exercise=TRUE, exercise.eval=FALSE, exercise.startover = TRUE}
+
 ```
 
 ```{r qui-tu-es-hint-1}
@@ -259,9 +260,9 @@ summary(...)
 ```{r qui-tu-es-solution}
 summary(hdv2003)
 ```
-```{r qui-tu-es-solution-code-check}
-grade_code(glue_correct = random_praiseFR())
-```
+<!-- # ```{r qui-tu-es-solution-code-check} -->
+<!-- # grade_code(glue_correct = random_praiseFR()) -->
+<!-- # ``` -->
 
 ### Explications:
 
@@ -285,7 +286,8 @@ summary(hdv2003, digits = 3)
 ```
 
 
-###Focus sur une ou plusieurs variables d’intérêt
+### Focus sur une ou plusieurs variables d’intérêt
+
 La fonction `summary()` produit un résumé statistique de toutes vos variables. Il est cependant possible de cibler une variable d’intérêt dans votre analyse. Pour cela, il suffit de taper `summary(Nom_de_la_table$Nom_de_la_variable)`.
 
 Selon le même principe, produisez les principales statistiques de la variable **age**.
@@ -368,19 +370,22 @@ On retrouve pour les variables **catégorielles** :
     
 
    
-#### *"Ce que les autres font, nous avons toujours l'impression que nous pourrions le faire mieux."* Emil Cioran
+### *"Ce que les autres font, nous avons toujours l'impression que nous pourrions le faire mieux."* Emil Cioran  
   
-
-L’avantage de `skim()` par rapport à `summary()` est la pertinence des paramètres de dispersion et de position, qui sont les plus usuels pour un statisticien. Chaque type de données est présenté séparément. SkimR peut gérer les valeurs booléennes, les dates et bien d’autres types comme le type numérique, caractère, factor, booléen, complexes, dates, POSIXct TODO FOOTNOTE(date avec temps, par exemple 2021-02-26 23:45 GMT), ts (des séries temporelles) et supporte les spark-bar et les spark-line (graphiques dans les cellules du data frame, qui ne doivent donc pas être considérés comme des valeurs)
-.  De plus, l’histogramme permet de rapidement regarder si la distribution de la variable choisie s’éloigne d’une distribution normale, souvent plus parlant qu’une p-value.
+  
+L’avantage de `skim()` par rapport à `summary()` est la pertinence des paramètres de dispersion et de position, qui sont les plus usuels pour un statisticien. Chaque type de données est présenté séparément. SkimR peut gérer les valeurs booléennes, les dates et bien d’autres types comme le type numérique, caractère, factor, booléen, complexes, dates, POSIXct[^1], ts[^2] et supporte les spark-bar et les spark-line[^3]. De plus, l’histogramme permet de rapidement regarder si la distribution de la variable choisie s’éloigne d’une distribution normale, souvent plus parlant qu’une p-value.
 
 SkimR retourne un objet skim_df (i.e. skim data frame). Ce dernier peut notamment être utilisé dans un pipeline *tidyverse*, contrairement au retour de `summary()` qui est une table. Si le format large ne convient pas, on peut également utiliser `to_long(nom_du_data_frame, les colonnes à skimer, les fonctions de skim skim_fun=skim)` qui retourne un data frame comprenant 4 colonnes : variable, type, stat et formatted.
 
-
-
+<!-- [^1]:date avec temps, par exemple 2021-02-26 23:45 GMT -->
+<!-- [^2]:des séries temporelles -->
+<!-- [^3]:graphiques dans les cellules du data frame, qui ne doivent donc pas être considérés comme des valeurs -->
 
 <!--Rappel des différences entre skim et summary-->
-Quelles différences observez-vous entre les 2 sorties ? Prenez quelques instants pour réfléchir puis comparez votre réflexion avec les informations suivantes : TODO remettre les sorties précédentes
+Quelles différences observez-vous entre les 2 sorties ? Prenez quelques instants pour réfléchir puis comparez votre réflexion avec les informations suivantes : voici la sortie `summary(hdv2003)` à comparer avec la sortie `skim(hdv2003)` affichée précédemment. 
+```{r affichagesummary, exercise=FALSE,echo=TRUE}
+summary(hdv2003)
+```
 
 
 - Si les deux fonctions indiquent le nombre de valeurs manquantes (NA), skim indique également son complémentaire (en structure), à savoir le taux de valeurs non manquantes
@@ -415,19 +420,34 @@ SkimR peut sembler rigide au premier abord. Cependant, il est possible de person
 
 <!--encore un rappel de la différence entre summary et skim-->
 
-### Exercice 6 Une fonction qui a de l'allure Jeu de mot à trouver
+### Une fonction qui a de l'allure
 
 Désormais, à l’aide des sorties de la fonction `skim()`, que pouvez-vous dire à nouveau sur la distribution de la variable âge et que ne le permettait pas la fonction summary ?
 
 
-<!-- FAIRE UN QUIZZ ICI-->
 
-- Skim fournit un histogramme de la distribution de chaque variable numérique, intégrée à la table des résultats. Cela permet de dire que la distribution de la variable âge est d’allure gaussienne, chose que l’on ne pouvait conclure à travers la fonction summary.
-- il n’y a aucune différence. 
-- La seule différence est le format.
+```{r quizzexo6, echo=FALSE}
+quiz(caption = "Une distribution normale ?",
+  question(text = "Que nous dit Skim que Summary nous a spolié ?",
+    answer(text = "il n’y a aucune différence", message = random_encouragementFR),
+    answer(text = "Oui, et je ne sais pas quoi ajouter", message = random_encouragementFR),
+    answer(text= "Skim fournit un histogramme de la distribution de chaque variable numérique, intégrée à la table des résultats. Cela permet de dire que la distribution de la variable âge est d’allure gaussienne, chose que l’on ne pouvait conclure à travers la fonction summary.", correct = TRUE),
+    answer(text = "La seule différence est le format.", message = random_encouragementFR),
+    answer(text="La variable âge est à la fois qualitative et quantitative, ce qui nous pose un problème",message = random_encouragementFR),
+    allow_retry = TRUE,
+    random_answer_order = TRUE,
+    post_message = random_praiseFR()
+    
+  )
+  
+)
+```
 
-<!-- 
-@ Mathieu: skim() permet de visualiser l’allure de la distribution des variables, et en particulier de la variable âge. Donc, on peut déduire des histogrammes de sortie que la variable âge est globalement distribuée selon une loi normale.
+
+### Résumons !
+
+`skim()` permet de visualiser l’allure de la distribution des variables, et en particulier de la variable `age`. Donc, on peut déduire des histogrammes de sortie que la variable âge est globalement distribuée selon une loi normale.
+
 Voici le code pour vérifier la normalité d’une variable à travers un qq-plot:
 
 library("ggpubr")
